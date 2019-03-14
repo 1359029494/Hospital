@@ -1,0 +1,60 @@
+package com.hospital.vo;
+
+//¹ÒºÅ±í
+public class Register {
+	private int regid;//¹ÒºÅµ¥±àºÅ
+	private int patid;//»¼Õß±àºÅ
+	private int repatage;//»¼ÕßÄêÁä
+	private String redname;//¹ÒºÅ¿ÆÊÒ
+	private String redoc;//½ÓÕïÒ½Éú
+	public int getRegid() {
+		return regid;
+	}
+	public void setRegid(int regid) {
+		this.regid = regid;
+	}
+	public int getPatid() {
+		return patid;
+	}
+	public void setPatid(int patid) {
+		this.patid = patid;
+	}
+	public int getRepatage() {
+		return repatage;
+	}
+	public void setRepatage(int repatage) {
+		this.repatage = repatage;
+	}
+	public String getRedname() {
+		return redname;
+	}
+	public void setRedname(String redname) {
+		this.redname = redname;
+	}
+	public String getRedoc() {
+		return redoc;
+	}
+	public void setRedoc(String redoc) {
+		this.redoc = redoc;
+	}
+	public Register(int regid, int patid, int repatage, String redname, String redoc) {
+		super();
+		this.regid = regid;
+		this.patid = patid;
+		this.repatage = repatage;
+		this.redname = redname;
+		this.redoc = redoc;
+	}
+	
+	public Register(int patid, int repatage, String redname, String redoc) {
+		super();
+		this.patid = patid;
+		this.repatage = repatage;
+		this.redname = redname;
+		this.redoc = redoc;
+	}
+	public Register() {
+		super();
+	}
+	
+}

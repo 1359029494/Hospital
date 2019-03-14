@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>个人信息</title>
+		<style type="text/css">
+			body{
+				background-color:white;
+			}
+			.div_par{
+				float: left;
+				margin-left:3% ;
+			}
+			table tr td{
+				width: 300px;
+				height: 50px;
+				border:transparent;
+				/*box-shadow: black 0 0 5px;*/
+				font-family: "楷体";
+				padding-left: 30px;
+			}
+			table{
+				
+				margin-top: 10%;
+				border:transparent;
+				border-radius: 10px;
+				/*box-shadow: black 0 0 10px;*/
+			}
+			table tr{
+				border: black solid 1px;
+				
+			}
+			.btn_change{
+				border: transparent;
+				background-color: black;
+				color: white;
+				line-height: 60px;
+				padding: 20px 60px;
+				width:100px;
+				border-radius: 10px;
+				box-shadow: white 0 0 10px; 
+			}
+			.btn_change:hover{
+				box-shadow: #00BFFF 0 0 10px; 
+				background-color: white;
+				color: black;
+			}
+			.ll{
+				text-align: right;
+			}
+			a{
+				text-decoration: none;
+			}
+		</style>
+		<script type="text/javascript">
+			function colorChange(eva){
+				eva.style.bo
+			}
+		</script>
+	</head>
+	<body>
+		<div class="div_par">
+			<table border="" cellspacing="" cellpadding="">
+			<tr>
+				<td colspan="2" align="center"><h2>个人信息</h2></td>
+			</tr>
+			<tr>
+				<td class="ll">姓名：</td>
+				<td><c:out value="${user_pat.patname }"></c:out></td>
+			</tr>
+			<tr>
+				<td class="ll">性别：</td>
+				<c:if test="${user_pat.patsex==0 }"><td>女</td></c:if>
+				<c:if test="${user_pat.patsex==1 }"><td>男</td></c:if>
+			</tr>
+			<tr>
+				<td class="ll">身份证号：</td>
+				<td>${user_pat.patidcard }</td>
+			</tr>
+			<tr>
+				<td class="ll">生日：</td>
+				<td>${user_pat.patbirthday }</td>
+			</tr>
+			<tr>
+				<td class="ll">手机号：</td>
+				<td>${user_pat.patphonenumber }</td>
+			</tr>
+			<tr>	
+				<td class="ll">邮箱：</td>
+				<td>${user_pat.patmail }</td>
+			</tr>
+			<tr>
+				<td class="ll">地址：</td>
+				<td>${user_pat.pataddress }</td>
+			</tr>
+			<tr>
+				<td class="ll">医保信息：</td>
+				<c:if test="${user_pat.patmi==0 }"><td>无</td></c:if>
+				<c:if test="${user_pat.patmi==1 }"><td>有</td></c:if>
+			</tr>
+			<tr >
+				<td colspan="2" align="center" ><a class="btn_change" onmousemove="colorChange(this)" href="updatemessage.jsp" target="one" >修改信息</a></td>
+			</tr>
+		</table>
+		</div>
+		
+	</body>
+</html>

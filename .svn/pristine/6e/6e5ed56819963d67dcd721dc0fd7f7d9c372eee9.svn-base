@@ -1,0 +1,364 @@
+<%@page import="com.hospital.vo.Register"%>
+<%@page import="com.hospital.dao.RegisterDAO"%>
+<%@page import="com.hospital.vo.Doctor"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name='TTUNION_verify' content='b846c3c2b85efabc496d2a2b8399cd62'>
+<meta name="sogou_site_verification" content="gI1bINaJcL" />
+<meta name="360-site-verification"
+	content="37ae9186443cc6e270d8a52943cd3c5a" />
+<meta name="baidu_union_verify"
+	content="99203948fbfbb64534dbe0f030cbe817">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="X-UA-Compatible"
+	content="IE=9; IE=8; IE=7; IE=EDGE;chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="AUI, a-ui.com">
+<meta name="baidu-site-verification" content="ZVPGgtpUfW" />
+<title>工大校医院管理系统</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link href="iTunesArtwork@2x.png" sizes="114x114"
+	rel="apple-touch-icon-precomposed">
+<link type="text/css" rel="stylesheet" href="admin/css/core.css">
+<link type="text/css" rel="stylesheet" href="admin/css/icon.css">
+<link type="text/css" rel="stylesheet" href="admin/css/home.css">
+
+
+
+</head>
+<body>
+
+	<!-- head YDC begin -->
+	<header class="ydc-header">
+		<div class="ydc-entered">
+			<div class="ydc-header-content ydc-flex">
+				<div class="ydc-column">
+					<a href="doc-index.html" class="ydc-column-ydc-logo"> <img
+						src="admin/images/icon/ydc-logo.png" title="" about="" alt="">
+					</a>
+				</div>
+				<div class="ydc-column">
+					<div class="ydc-column-user">
+						<div class="ydc-user-photo">
+							<a href="javascript:;"> <img
+								src="admin/images/icon/photo.png" title="" about="" alt="">
+							</a>
+						</div>
+						<%
+							HttpSession session2=request.getSession();
+							Doctor d=(Doctor)session2.getAttribute("doctor");
+						%>
+						<div class="ydc-user-info">
+							<div class="ydc-user-info-name">
+								<a href="javascript:;"><%=d.getDocname() %></a>
+							</div>
+							<div class="ydc-user-info-func ydc-flex">
+								<span class="ydc-tag">在线</span> <a href="doclogin.jsp">注销</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- head YDC end -->
+
+	<!-- content YDC begin -->
+	<section>
+		<div class="ydc-content-slide ydc-body">
+			<div class="ydc-flex">
+				<!-- left begin -->
+				<div class="ydc-column ydc-column-2">
+					<div class="ydc-menu">
+						<ul>
+							<li class="ydc-menu-item"><a href="doc-index.html"
+								class="active"><i class="ydc-icon ydc-icon-home fl"></i>首页</a></li>
+
+							<li class="ydc-menu-item"><span class="ydc-menu-sub-title"><em
+									class="imessage"></em>个人信息管理</span>
+								<ul>
+									<li><a href="docinfo.jsp">管理个人信息</a></li>
+								</ul></li>
+							<li class="ydc-menu-item"><span class="ydc-menu-sub-title">
+									<em class="register"></em>挂号列表管理
+							</span>
+								<ul>
+									<li><a href="../dowatchguahaolist">查看挂号列表</a></li>
+								</ul></li>
+							<li class="ydc-menu-item"><span class="ydc-menu-sub-title">
+									<em class="me"></em>病历管理
+							</span>
+								<ul>
+									<li><a href="doc-docme.html">查看接诊病历</a></li>
+									<li><a href="doc-patme.html">查看患者病历</a></li>
+								</ul></li>
+						</ul>
+					</div>
+				</div>
+				<!-- left end -->
+				<!-- right begin -->
+				<div class="ydc-column ydc-column-8">
+					<div class="ydc-entered-box">
+						<div class="ydc-content-right">
+							<div class="ydc-right-head">
+						  <%
+						  	String docname=d.getDocname();
+						  	RegisterDAO dao=new RegisterDAO();
+						  	int size=dao.getTotalByDoc(docname);
+						  	Register r=new Register();
+						  	if(size==0){
+						  		
+						  	}else{
+						  		r=dao.findFirst(docname);
+						  	}
+						  %>
+								<div class="ydc-right-head-info">
+									<dl>
+										<a href="#">
+											<dt>待接诊人数</dt>
+											<dd><%=size %></dd>
+										</a>
+									</dl>
+									<dl>
+										<a href="#">
+											<dt>下一接诊挂号序号</dt>
+											<dd><%=r.getRegid() %></dd>
+										</a>
+									</dl>
+
+								</div>
+<<<<<<< .mine
+								<a id="dolink" href="medicalrecord.jsp?patid=<%=r.getPatid() %>&docid=<%=d.getDocid() %>&regid=<%=r.getRegid()%>" onclick="docheck()">
+									<button  id="dobutton" class="btn ydc-ne-carousel">
+										<i class="ydc-icon-shu"></i>
+											<span>接诊</span>
+									</button>
+								</a>
+=======
+								<button class="btn ydc-ne-carousel"
+									onclick="javascript:window.location.href='release.html';">
+									<i class="ydc-icon-shu"></i> <span>接诊</span>
+								</button>
+>>>>>>> .r106
+							</div>
+							<!-- gongGao begin -->
+							<div class="ydc-loading-box">
+								<div class="ydc-tabPanel">
+									<div>
+										<ul>
+											<li class="hit">公告栏</li>
+										</ul>
+
+									</div>
+									<div class="ydc-panes">
+										<div class="ydc-pane" style="display: block;">
+											<ol class="ydc-pane-list">
+												<li><a href="#" target="_blank">关于本月新院长就任的通知 <i>new</i></a>
+													<span>2017-04-17 10:00:00</span></li>
+												<li><a href="#" target="_blank">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#" target="_blank">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#" target="_blank">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#" target="_blank">关于本月新院长就任的通知<i>new</i></a>
+													<span>2017-04-17 10:00:00</span></li>
+												<li><a href="#" target="_blank">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#" target="_blank">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#" target="_blank">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#" target="_blank">关于本月新院长就任的通知<i>new</i></a>
+													<span>2017-04-17 10:00:00</span></li>
+												<li><a href="#" target="_blank">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#" target="_blank">关于本月新院长就任的通知<i>new</i></a>
+													<span>2017-04-17 10:00:00</span></li>
+												<li><a href="#">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#">关于本月新院长就任的通知</a> <span>2017-04-17
+														10:00:00</span></li>
+											</ol>
+											<div class="ydc-pagination">
+												<ol>
+													<li class="ydc-previous-item">
+														<button class="ydc-previous-item-btn-medium ydc-disabled">
+															<span>上一页</span>
+														</button>
+													</li>
+													<li>
+														<button class="ydc-previous-item-btn-medium cur">1</button>
+													</li>
+													<li>
+														<button class="ydc-previous-item-btn-medium">2</button>
+													</li>
+													<li>
+														<button class="ydc-previous-item-btn-medium">3</button>
+													</li>
+													<li class="ydc-previous-item">
+														<button class="ydc-previous-item-btn-medium">
+															<span>下一页</span>
+														</button>
+													</li>
+													<li class="ydc-item-quick">第
+														<div class="ydc-item-quick-kun">
+															<input type="number" aria-invalid="false" class="">
+														</div>页
+														<button style="margin-left: 5px;"
+															class="ydc-previous-item-btn-medium">
+															<span>跳转</span>
+														</button>
+													</li>
+												</ol>
+											</div>
+										</div>
+										<div class="ydc-pane">
+											<ol class="ydc-pane-list">
+												<li><a
+													href="https://www.toutiao.com/i6553905796478927364/"
+													target="_blank">大号“思域”全新十代雅阁，革新换代后的全新十代雅阁到底如何！<i>new</i></a>
+													<span>2017-04-17 10:00:00</span></li>
+												<li><a
+													href="https://www.toutiao.com/i6555328767567331848/"
+													target="_blank">在国内为什么丰田阿尔法加价那么厉害还是会有人买？</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#">全新紧凑级SUV 天津一汽骏派D80将8月上</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#">4款车型/1.5L动力 骏派CX65旅行车明日上市</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#">大号“思域”全新十代雅阁，革新换代后的全新十代雅阁到底如何！<i>new</i></a>
+													<span>2017-04-17 10:00:00</span></li>
+												<li><a href="#">在国内为什么丰田阿尔法加价那么厉害还是会有人买？</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#">全新紧凑级SUV 天津一汽骏派D80将8月上</a> <span>2017-04-17
+														10:00:00</span></li>
+												<li><a href="#">4款车型/1.5L动力 骏派CX65旅行车明日上市</a> <span>2017-04-17
+														10:00:00</span></li>
+											</ol>
+											<div class="ydc-pagination">
+												<ol>
+													<li class="ydc-previous-item">
+														<button class="ydc-previous-item-btn-medium ydc-disabled">
+															<span>上一页</span>
+														</button>
+													</li>
+													<li>
+														<button class="ydc-previous-item-btn-medium cur">1</button>
+													</li>
+													<li>
+														<button class="ydc-previous-item-btn-medium">2</button>
+													</li>
+													<li>
+														<button class="ydc-previous-item-btn-medium">3</button>
+													</li>
+													<li class="ydc-previous-item">
+														<button class="ydc-previous-item-btn-medium">
+															<span>下一页</span>
+														</button>
+													</li>
+													<li class="ydc-item-quick">第
+														<div class="ydc-item-quick-kun">
+															<input type="number" aria-invalid="false" class="">
+														</div>页
+														<button style="margin-left: 5px;"
+															class="ydc-previous-item-btn-medium">
+															<span>跳转</span>
+														</button>
+													</li>
+												</ol>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- gongGao End -->
+						</div>
+					</div>
+				</div>
+				<!-- right end -->
+			</div>
+		</div>
+
+		<div class="ydc-footer">
+			<div>
+				<p>©2018 周树人版权所有About 公司简介 联系方法 招聘信息 客户服务 隐私政策 广告服务 网站地图 意见反馈
+					不良信息举报</p>
+			</div>
+		</div>
+	</section>
+	<!-- content YDC end -->
+
+	<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+	<script type="text/javascript">
+	
+		window.onload=function (){
+			var size=<%=size%>
+		    //alert();
+		    var button = document.getElementById("dobutton");
+		    var a = document.getElementById("dolink");
+		    if(size == 0){
+		    	button.style.background="gray"
+		    	a.href="#";
+		    }
+		}
+	
+		function docheck(){
+			var size=<%=size%>
+			//alert(size);
+			var a = document.getElementById("dolink");
+			if(size == 0){
+				alert("当前没有待接诊的患者！");
+			}
+		}	
+	
+	</script>
+
+	<script type="text/javascript" src="admin/js/jquery.min.js"></script>
+	<script type="text/javascript">
+	    var slideIndex = 0;
+	    showSlides();
+
+	    function showSlides() {
+	        var i;
+	        var slides = document.getElementsByClassName("mySlides");
+	        for (i = 0; i < slides.length; i++) {
+	            slides[i].style.display = "none";
+	        }
+	        slideIndex++;
+	        if (slideIndex> slides.length) {slideIndex = 1}
+	        slides[slideIndex-1].style.display = "block";
+	        setTimeout(showSlides, 3000); // 滚动时间
+	    }
+	</script>
+
+	<script type="text/javascript">
+	    $(function(){
+	        $('.ydc-tabPanel ul li').click(function(){
+	            $(this).addClass('hit').siblings().removeClass('hit');
+	            $('.ydc-panes>div:eq('+$(this).index()+')').show().siblings().hide();
+	        })
+	    })
+	</script>
+
+</body>
+</html>

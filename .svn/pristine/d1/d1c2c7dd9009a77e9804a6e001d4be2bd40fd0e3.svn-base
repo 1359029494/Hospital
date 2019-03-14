@@ -1,0 +1,647 @@
+
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户注册</title>
+<link rel="stylesheet" href="css/iconfont.css">
+<link type="text/css" rel="stylesheet" href="css/emailAutoComple.css">
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="icon" href="images/a0.jpg" type="image/x-icon">
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+<script src="js/iconfont.js" type="text/javascript" charset="utf-8"></script>
+<!-- Fonts Awesome -->
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<!-- Google Fonts -->
+<link
+	href='https://fonts.googleapis.com/css?family=Raleway:400,200,300,100,500,600,700,800,900'
+	rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400"
+	rel="stylesheet">
+<!-- animate Effect -->
+<link href="css/animate.css" rel="stylesheet">
+<!-- Main CSS -->
+<link href="css/style.css" rel="stylesheet">
+<!-- Responsive CSS -->
+<link href="css/responsive.css" rel="stylesheet">
+<style type="text/css">
+.demo {
+	width: 80%;
+	margin: 20px auto
+}
+
+.demo h3 {
+	height: 32px;
+	line-height: 32px
+}
+
+.demo p {
+	line-height: 24px
+}
+
+pre {
+	margin-top: 10px;
+	padding: 6px;
+	background: #f7f7f7
+}
+</style>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.cityselect.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$.AutoComplete("#patmail");
+		$("#city_4").citySelect({
+			prov : "湖南",
+			city : "长沙",
+			dist : "岳麓区",
+			nodata : "none"
+		});
+	});
+</script>
+<style type="text/css">
+.icon {
+	width: 1em;
+	height: 1em;
+	vertical-align: -0.15em;
+	fill: currentColor;
+	overflow: hidden;
+}
+
+.register:hover {
+	
+}
+
+body {
+	background-color: #f5f4f4;
+	background-size: cover;
+}
+
+.text_T {
+	box-shadow: black 0 0 8px;
+}
+
+.box {
+	margin-top: 60px;
+	padding-bottom: 60px;
+	padding-top: 30px;
+	text-align: center;
+	width: 700px;
+	float: left;
+	margin-left: 25%;
+	box-shadow: black 0px 0px 18px;
+	background-color: white;
+	color: black;
+	border-top: 3px solid #00AEF0;
+	margin-bottom: 90px;
+}
+
+input:focus {
+	border: 2px solid;
+	border-color: #03a9f4;
+}
+
+input {
+	height: 25px;
+	border-radius: 2px;
+	font-family: 楷体;
+	font-family: 'Raleway', sans-serif;
+	font-family: 'Raleway', sans-serif;
+	border: transparent;
+}
+
+input[type="text"] {
+	width: 175px;
+}
+
+input[type="password"] {
+	width: 175px;
+}
+
+input[type="date"] {
+	width: 175px;
+}
+
+.from_te {
+	
+}
+
+input[type="submit"] {
+	cursor: pointer;
+	border-radius: 20px;
+	font-family: STKaiti;
+	width: 400px;
+	height: 40px;
+}
+
+#sex input, #sex svg, #sex span {
+	vertical-align: middle;
+}
+
+.tishi {
+	color: #D2322D;
+	padding-left: 15px;
+}
+
+.hahaha {
+	padding-left: 15px;
+}
+
+.mimatwo {
+	padding-left: 15px;
+}
+
+.preregister {
+	background-color: #D8d8d8;
+}
+
+.register {
+	background-color: #5897FB;
+}
+.setregister{
+	background-color: #d8d8d8;
+}
+.title {
+	font-size: 30px;
+	text-align: center;
+	font-size: 40px;
+}
+
+.li {
+	width: 100%;
+	margin-top: 10px;
+	line-height: 70px;
+	clear: both;
+	margin-left: 160px;
+}
+
+.ul {
+	width: 100%;
+}
+
+.from_te {
+	font-size: 18px;
+	margin-left: 5px;
+}
+
+.span {
+	width: auto;
+	margin-right: 80;
+}
+
+.fu_span {
+	float: left;
+}
+
+.phonetishi {
+	margin-right: 125px;
+}
+</style>
+<script src="js/iconfont.js"></script>
+<script type="text/javascript" src="js/emailAutoComple.js"></script>
+</head>
+<body>
+	<header id="header" class="head">
+		<div class="top-header">
+			<div class="container">
+				<div class="row ">
+					<ul class="contact-detail2 col-md-6 pull-left">
+						<li><a href="#" target="_blank"><i class="fa fa-mobile"></i>Call
+								US + (81) 178 614 4707</a></li>
+						<li><a href="#" target="_blank"><i
+								class="fa fa-envelope-o"></i> 1441043674@qq.com</a></li>
+					</ul>
+					<div class="social-links col-md-6 pull-right">
+						<ul class="social-icons pull-right">
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<nav class="navbar navbar-default navbar-menu">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.jsp">
+						<div class="logo-text">
+							<span><samp>
+									<i class="iconfont icon-hospital"
+										style="line-height: 40px; font-size: 40px;"></i>
+								</samp>工大校医</span>
+						</div>
+					</a>
+				</div>
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1" data-hover="dropdown"
+					data-animations="fadeIn">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="active"><a href="index.jsp">主页</a></li>
+						<li><a href="aboutus.jsp">关于我们 </a></li>
+						<li><a href="contact.jsp">反馈意见 </a></li>
+						<li><a href="parlogin.jsp">登陆</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+	</header>
+	<div class="box">
+		<form action="../dopatregister" method="post"
+			onsubmit="return check()">
+			<span> <span class="title"> 用户注册 </span>
+			</span>
+			<ul class="ul">
+				<li class="li">
+					<span class="from_te fu_span"> 真实姓名： </span> 
+					<span class="fu_span"> 
+						<input name="patname" id="patname" type="text" class="text_T" onblur="checkname()" />
+					</span> 
+					<span class="span fu_span"> 
+						<i class="tishi" id="name">*必填 </i>
+					</span>
+				</li>
+				
+				<li class="li">
+					<span class="from_te fu_span"> 身份证号： </span> 
+					<span class="fu_span"> 
+						<input name="patidcard" id="patidcard" type="text" class="text_T" onblur="checkid()" />
+					</span> 
+					<span class="fu_span span"> 
+						<i class="tishi" id="idcard">*必填</i>
+					</span>
+				</li>
+				
+				<li class="li">
+					<span class="from_te fu_span"> 出生日期： </span> 
+					<span class="fu_span"> 
+						<input name="patbirthday" onblur="checkdate()" id="patbirthday" type="date" class="text_T" />
+					</span> 
+					<span class="fu_span span"> 
+						<i class="hahaha"> </i>
+					</span>
+				</li>
+				<li class="li">
+					<span class="from_te fu_span"> 性别： </span> 
+					<span id="sex" class="fu_span"> 
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						<input type="radio" name="patsex" value="1"> 
+						<svg class="icon" aria-hidden="true">
+	      					<use xlink:href="#icon-nansheng"></use>
+	      				</svg> 
+	      				<span> 男 </span> 
+	      			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	      				<input type="radio" name="patsex" value="0"> 
+	      				<svg class="icon" aria-hidden="true">
+	      					<use xlink:href="#icon-nvsheng"></use>
+	      				</svg> 
+	      				<span> 女 </span>
+					</span>
+				</li>
+				<li class="li">
+					<span class="from_te fu_span"> 电话号码： </span> 
+					<span class="fu_span"> 
+						<input name="patphonenumber" id="patphonenumber" type="text" class="text_T"	onblur="checkphone()" />
+					</span> 
+					<span class="fu_span span" style="width: 180px;"> 
+						<i class="tishi phonetishi" id="phone"> *必填 </i>
+					</span>
+				</li>
+				
+				<li class="li">
+					<span class=" fu_span from_te"> 短信验证： </span> 
+					<span class="fu_span"> 
+						<input name="msgyz" id="msgyz" onblur="chekyzma()" type="text" class="text_T" />
+					</span> 
+					<span class="fu_span span" style="width: 100px; margin-right: 15px;"> 
+						<i class="hahaha" id="hahaha"> </i>
+					</span> 
+					<span class="fu_span span"> 
+						<input name="getyanz" id="getyanz" type="button" value="获取验证码" onclick="getyzma(this)" style="background: #63B8FF; line-height: 0px; font-size: 10px; padding-left: 20px; padding-right: 20px; height: 25px; margin-left: 20px; width: 100px; color: white;" />
+					</span>
+				</li>
+				
+				<li class="li">
+					<span style="margin-left: 40px;" class="fu_span from_te"> 密码： </span> 
+					<span class="fu_span">
+						<input name="patpass" id="patpass" type="password" class="text_T" onblur="check_pass()" />
+					</span> 
+					<span class="fu_span span"> 
+						<i class="tishi" id="pass">4~16位的数字，字母，符号的组合 </i>
+					</span>
+				</li>
+
+				<li class="li"><span class="from_te fu_span">
+						确认密码：</span> <span class="fu_span"> <input
+						name="checkpass" id="checkpass" onblur="checkmima()"
+						type="password" class="text_T" />
+				</span> <span class="fu_span span"> <i class="mimatwo" id="mimatwo">
+
+					</i>
+				</span></li>
+				<li class="li">
+					<span style="margin-left: 5px" class="fu_span from_te"> 家庭住址： </span> 
+					<span class="fu_span">
+						<span id="city_4" style="width: 300px; margin: 0; padding: 0;">
+							<select id="prov" class="prov" name="prov" class="text_T"></select>
+							<select id="city" class="city" name="city" disabled="disabled" class="text_T"></select> 
+							<select id="dist" class="dist" name="dist" disabled="disabled" class="text_T"></select>
+						</span>
+
+					</span>
+				</li>
+				<li class="li"><span class="from_te fu_span">
+						邮箱地址：</span> <span class="fu_span"> <input
+						name="patmail" id="patmail" type="text" class="text_T"
+						onblur="ischeckemail()" />
+				</span> <span class="fu_span span"> <i class="tishi" id="youxiang">
+							*必填 </i>
+				</span></li>
+				<li style="margin-top: 120px">
+					<span style="text-align: center;">
+						<input name="register" id="register" class="preregister" type="submit"	value="注册" style="width: 300px; line-height: 0px; color: white; align: center;" />
+					</span>
+				</li>
+			</ul>
+		</form>
+	</div>
+</body>
+<script src="js/jquery.plugin.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/bootstrap-dropdownhover.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/jquery.counterup.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/shenfen.js"></script>
+<script type="text/javascript">
+	//获取短信验证码
+	var code = getIdCode(6);
+	function getyzma(obj) {
+		var phone = document.getElementById("phone");
+		var number = document.getElementById("patphonenumber").value;
+		if (number.length == 0 ) {
+			phone.innerHTML = "请输入手机号";
+			phone.style.color = "#D2322D";
+			phone.style.marginRight = "67px";
+		}else if(phone.innerHTML != "✔"){
+			phone.innerHTML = "手机号不合法";
+			phone.style.color = "#D2322D";
+			phone.style.marginRight = "67px";
+		}else {
+			settime(obj)
+			$.post("../doduanxinyanzheng", {
+				'phone' : number,
+				'code' : code
+			}, function(data) {
+
+			}, "json");
+		}
+	};
+
+	function getIdCode(length) {
+		if (length == undefined) {
+			length = 4;
+		}
+		var pow = Math.pow(10, length);
+		var code = Math.floor(Math.random() * pow + pow / 10).toString();
+		return code.substr(0, length);
+	};
+
+	//查看验证码是否匹配
+	function chekyzma() {
+		var yzma = document.getElementById("msgyz").value;
+		var td = document.getElementById("yz");
+		var i = document.getElementById("hahaha");
+		if (yzma != code) {
+			i.innerHTML = "验证码错误";
+			i.style.marginRight = "15px";
+			i.style.color = "#d2322d";
+			return;
+		} else {
+			i.innerHTML = "✔";
+			i.style.marginRight = "154px";
+			i.style.fontSize = "15px";
+			i.style.color = "#6cfd01";
+		}
+	};
+	//邮箱
+	function ischeckemail() {
+		var div = document.getElementById("youxiang");
+		var email = document.getElementById("patmail").value;
+		if (email != "") {
+			var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+			isok = reg.test(email);
+			if (!isok) {
+				div.innerHTML = "";
+				div.innerHTML = "格式不正确";
+				div.style.color = "#d2322d";
+				return false;
+			} else {
+				div.innerHTML = "✔";
+				div.style.fontSize = "15px";
+				div.style.color = "#6cfd01";
+			}
+		} else {
+			div.innerHTML = "";
+			div.innerHTML = "请填写邮箱"
+			div.style.color = "#d2322d";
+			return false;
+		}
+	}
+
+	//判断必填框是否填写，选上才给予注册
+	function check() {
+		var i = document.getElementById("hahaha");
+		var div = document.getElementById("youxiang");
+		var phone = document.getElementById("phone");
+		var name = document.getElementById("name");
+		var idcard = document.getElementById("idcard");
+		var pass = document.getElementById("pass");
+		var m = document.getElementById("mimatwo");
+		var input = document.getElementById("register");
+		if(i.innerHTML != "✔" || div.innerHTML != "✔" ||phone.innerHTML != "✔" ||name.innerHTML != "✔"||idcard.innerHTML != "✔"||pass.innerHTML != "✔"||m.innerHTML != "✔"){
+			return false;
+		}
+	};
+	//手机文本框 失去焦点时查询出手机号是否已被注册
+	function checkphone() {
+		var phone = document.getElementById("phone");
+		var patphonenumber = document.getElementById("patphonenumber").value;
+		var len = patphonenumber.length;
+        var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+        iden = myreg.test(patphonenumber);
+		if (len != 11) {
+			phone.innerHTML = "无效手机号";
+			phone.style.marginRight = "90px";
+			phone.style.color = "#d2322d";
+			return false;
+		}else if(!iden){
+			phone.innerHTML = "无效手机号";
+			phone.style.marginRight = "90px";
+			phone.style.color = "#d2322d";
+			return false;
+		}else {
+			$.get("../dofindphoneforzhuce", {
+				patphonenumber : patphonenumber
+			}, function(data) {
+				if (data == 0) {
+					phone.innerHTML = "✔";
+					phone.style.fontSize = "152px";
+					phone.style.color = "#6cfd01";
+				} else {
+					phone.innerHTML = "手机号已被注册";
+					phone.style.marginRight = "67px";
+					phone.style.color = "#d2322d";
+				}
+			}, "json");
+		}
+	};
+	//计时器
+	var countdown = 60;
+	function settime(obj) {
+
+		if (countdown == 0) {
+			obj.removeAttribute("disabled");
+			obj.value = "重新发送";
+			countdown = 60;
+			return;
+		} else {
+			obj.setAttribute("disabled", true);
+			obj.value = countdown;
+			countdown--;
+		}
+		setTimeout(function() {
+			settime(obj)
+		}, 1000)
+	};
+
+	//姓名框的失去焦点事件
+	function checkname() {
+		var patname = document.getElementById("patname").value;
+		var name = document.getElementById("name");
+		if (patname != "") {
+			name.innerHTML = "✔";
+			name.style.fontSize = "15px";
+			name.style.color = "#6cfd01";
+		} else {
+			name.innerHTML = "请输入姓名";
+			name.style.color = "#d2322d";
+			return false;
+		}
+	};
+	
+	//身份证号框的失去焦点事件
+	function checkid() {
+		var patidcard = document.getElementById("patidcard").value;
+		var idcard = document.getElementById("idcard");
+	    //是否为空
+	    if(patidcard === ''){
+	    	idcard.innerHTML = "请输入身份证号";
+			idcard.style.color = "#d2322d";
+	        return false;
+	    }
+	    //校验长度，类型
+	    if(isCardNo(patidcard) === false){
+	    	idcard.innerHTML = "身份证号不合法";
+			idcard.style.color = "#d2322d";
+	        return false;
+	    }
+	    //检查省份
+	    if(checkProvince(patidcard) === false){
+	    	idcard.innerHTML = "身份证号不合法";
+			idcard.style.color = "#d2322d";
+	        return false;
+	    }
+	    //校验生日
+	    if(checkBirthday(patidcard) === false){
+	    	idcard.innerHTML = "身份证号不合法";
+			idcard.style.color = "#d2322d";
+	        return false;
+	    }
+	    //检验位的检测
+	    if(checkParity(patidcard) === false){
+	    	idcard.innerHTML = "身份证号不合法";
+			idcard.style.color = "#d2322d";
+	       	return false;
+	    }
+	    idcard.innerHTML = "";
+		$.get("../dofindpatshenfen",{patidcard :patidcard},function(data){
+			if(data==1){
+				idcard.innerHTML = "用户已存在";
+				idcard.style.color = "#d2322d";
+				return false;
+			}else{
+				var patbirthday = document.getElementById("patbirthday");
+				var dateyear = patidcard.substring(6,10);
+				var datemin = patidcard.substring(10,12);
+				var dateday = patidcard.substring(12,14);
+				var date = dateyear+"-"+datemin+"-"+dateday;
+				patbirthday.value = date.replace(/\//g,"-");
+				var sexnumber = patidcard.substring(14,15);
+				var sex = document.getElementsByName("patsex");
+				if(sexnumber%2 == 0){
+					sex[1].checked = true;
+					sex[0].checked = false;
+				}else{
+					sex[0].checked = true;
+					sex[1].checked = false;
+				}
+				idcard.innerHTML = "✔";
+				idcard.style.fontSize = "15px";
+				idcard.style.color = "#6cfd01";
+			}
+		},"json");
+	    return true;
+	};
+	//密码框的失去焦点事件
+	function check_pass() {
+		var userpass = document.getElementById("patpass").value;
+		var pass = document.getElementById("pass");
+		if (userpass.length < 4) {
+			pass.innerHTML = "密码长度过短";
+			pass.style.color = "#d2322d";
+			return false;
+		}else if(userpass.length > 16){
+			pass.innerHTML = "密码长度过长";
+			pass.style.color = "#d2322d";
+			return false;
+		}else if(userpass = ""){
+			pass.innerHTML = "请输入密码";
+			pass.style.color = "#d2322d";
+			return false;
+		} else {
+			pass.innerHTML = "✔";
+			pass.style.fontSize = "15px";
+			pass.style.color = "#6cfd01";
+		}
+	};
+	//再次确认密码
+	function checkmima() {
+		var old = document.getElementById("patpass").value;
+		var now = document.getElementById("checkpass").value;
+		var m = document.getElementById("mimatwo");
+		if (old != now) {
+			m.innerHTML = "密码不一致";
+			m.style.color = "#d2322d";
+			return;
+		} else {
+			m.innerHTML = "✔";
+			m.style.fontSize = "15px";
+			m.style.color = "#6cfd01";
+		}
+	};
+</script>
+</html>

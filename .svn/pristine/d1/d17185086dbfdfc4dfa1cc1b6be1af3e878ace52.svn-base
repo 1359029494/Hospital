@@ -1,0 +1,32 @@
+package com.hospital.mapper;
+
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.hospital.vo.Admmail;
+import com.hospital.vo.Orders;
+
+public class AdmmailMapper implements IMapper {
+
+	@Override
+	public List mapper(ResultSet rst) throws Exception {
+		List<Admmail> list = new ArrayList<Admmail>();
+		try {
+			while(rst.next()) {
+				int mailid = rst.getInt("MAILID");
+				int docid = rst.getInt("DOCID");
+				String mailmessages = rst.getString("MAILMESSAGE");
+				int mailstate = rst.getInt("ORSTATE");
+				Date maildate = rst.getDate("MAILDATE");
+				Admmail ad = new Admmail(docid, mailmessages, mailstate, maildate) ;
+				list.add(ad);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+}

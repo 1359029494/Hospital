@@ -1,0 +1,135 @@
+.bl_bigborder {
+	border: 2px solid #AAAAAA;
+	height: 100%;
+	padding: 30px 20px;
+}
+
+.bl_boxborder {
+	border: 2px solid #AAAAAA;
+	padding: 40px;
+}
+
+.bl_title {
+	font-size: 25px;
+	margin-left: 45%;
+}
+
+.bl_date {
+	float: right;
+	display: inline-block;
+}
+
+.bl_fengehr {
+	margin-bottom: 20px;
+	background-color: transparent;
+	border: none;
+}
+
+.bl_patient_name {
+	font-size: 20px;
+	margin-left: 90px;
+}
+
+.bl_patient_zhenzhuang {
+	width: 90%;
+	height: 200px;
+	margin-left: 90px;
+	margin-top: -25px;
+	resize: none;
+}
+
+.bl_patient_zhenzhuang:hover {
+	
+}
+
+.bl_patient_xinxi {
+	font-size: 20px;
+}
+
+.bl_doctor {
+	font-size: 20px;
+}
+
+.bl_yaoul {
+	margin-top: 10px;
+	width: 100%;
+}
+
+.bl_yaoli {
+	line-height: 25px;
+}
+
+.bl_yao {
+	font-size: 20px;
+	float: left;
+	clear: both;
+}
+
+.bl_yaonumber {
+	color: red;
+	float: right;
+	margin-left: 300px;
+	margin-top: -45px;
+	height: 50px;
+}
+
+.bl_caozuo {
+	list-style: none;
+	margin-left: 80px;
+	font-size: 20px;
+}
+
+.bl_caseborder {
+	border: 2px solid #AAAAAA;
+	float: left;
+	margin-top: 20px;
+	padding: 15px 45px;
+	margin-left: 20%;
+}
+
+.bl_save {
+	font-size: 20px;
+}
+
+.bl_button {
+	width: 30px;
+	height: 30px;
+	float: right;
+	margin-top: 7px;
+	border: 1px solid #AAAAAA;
+	font-size: 40px;
+	color: red;
+	background-color: #AAAAAA;
+	line-height: 30px;
+}
+
+.bl_shuzi {
+	width: 40px;
+	float: right;
+	height: 30px;
+	margin-top: 7px;
+}
+
+.bl_shanchu {
+	font-size: 25px;
+	float: right;
+	margin-top: -45px;
+	margin-right: 50px;
+	color: #AAAAAA;
+}
+
+.bl_addyao {
+	border: 1px solid #AAAAAA;
+}
+
+.bl_findyao {
+	border: 1px solid #AAAAAA;
+	font-size: 20px;
+	background-color: #AAAAAA;
+	cursor: default;
+}
+
+.bl_yaoming {
+	font-size: 20px;
+	float: left;
+}

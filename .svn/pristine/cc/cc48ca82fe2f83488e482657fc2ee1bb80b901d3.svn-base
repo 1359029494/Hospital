@@ -1,0 +1,107 @@
+	function todaytime() {
+		var span = document.getElementById("bl_todaydate");
+		var date = new Date();
+		var seperator1 = "-";
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1;
+		var strDate = date.getDate();
+		if(month >= 1 && month <= 9) {
+			month = "0" + month;
+		}
+		if(strDate >= 0 && strDate <= 9) {
+			strDate = "0" + strDate;
+		}
+		var time = year + seperator1 + month + seperator1 + strDate;
+		span.innerHTML = time;
+	}
+	function add(){				
+		var addyao = document.getElementById("bl_addyao");
+		var tishi = document.getElementById("bl_addtishi");
+		if(addyao.value.length==0){
+			tishi.innerHTML="请输入正确的药品名称！"
+		}else{
+		var span = addyao.parentElement;
+		var div = span.parentElement;
+		var ul = document.createElement("ul");
+		var li = document.createElement("li");
+		var span1 = document.createElement("span");
+		var div1 = document.createElement("div");
+		var a1 = document.createElement("a");
+		var inputs = document.createElement("input");
+		var a2 = document.createElement("a");
+		var span2 = document.createElement("span");
+		var span3 = document.createElement("span");
+		div.appendChild(ul);
+		ul.appendChild(li);
+		li.appendChild(span3);
+		li.appendChild(span1);
+		span1.appendChild(div1);
+		div1.appendChild(a1);
+		div1.appendChild(inputs);
+		div1.appendChild(a2);
+		li.appendChild(span2);
+		ul.className="bl_yaoul";
+		li.className="bl_yaoli";
+		span1.className="bl_yao";
+		div1.className="bl_yaonumber";
+		a1.className="bl_button";
+		a1.innerHTML="+";
+		inputs.className="bl_shuzi";
+		inputs.value="1";
+		inputs.name="number";
+		a2.className="bl_button";
+		a2.innerHTML="-";
+		span2.className="bl_shanchu";
+		li.style.width='100%';
+		span3.innerHTML=addyao.value;
+		span3.className="bl_yaoming";
+		
+		li.onmouseover=function(){
+			var tubiao = this.getElementsByTagName("span");
+			var li1 = tubiao[2].parentElement;
+			var ul1 = li1.parentElement;
+			tubiao[2].innerHTML = "删除";
+			tubiao[2].onclick = function(){
+				ul1.remove();
+				tishi.innerHTML="";
+			}
+		}
+		li.onmouseout=function(){
+			var tubiao = this.getElementsByTagName("span");
+			tubiao[2].innerHTML="";
+			tishi.innerHTML="";
+		}
+		a1.onclick=function(){
+			var div4 = this.parentElement;
+			var yunsuan = div4.getElementsByTagName("input");
+			yunsuan[0].value = parseInt(yunsuan[0].value) + 1;
+			tishi.innerHTML="";
+		}
+		a2.onclick=function(){
+			var div5 = this.parentElement;
+			var yunsuan = div5.getElementsByTagName("input");
+			var div3 = this.parentElement;
+			var span3 = div3.parentElement;
+			var li3 = span3.parentElement;
+			var ul3 = li3.parentElement;
+			if(yunsuan[0].value != 1){
+				yunsuan[0].value = parseInt(yunsuan[0].value) - 1;
+			}else{
+				ul3.remove();
+				tishi.innerHTML="";
+			}	
+		}
+		addyao.value="";
+		tishi.innerHTML="";
+		}
+	} 
+	
+	function fasong(){
+		document.onkeydown=function(event){
+			var fasong = document.getElementById("bl_fasong");
+    	var e = event || window.event || arguments.callee.caller.arguments[0];
+			if(e && e.keyCode == 13){
+				fasong.onclick();
+			}
+		};
+	}		

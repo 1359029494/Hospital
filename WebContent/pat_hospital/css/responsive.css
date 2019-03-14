@@ -1,0 +1,197 @@
+/* --------------------------------------
+=========================================
+Pixel | Agency - Responsive Mutipurpose HTML5 Template
+Version: 1.1 (Release)
+Designed By: rkwebdesigns
+=========================================
+*/
+@media only screen and (min-width: 1201px) {
+	.carousel-caption {
+		bottom: 80px;
+	}
+	.carousel-inner>.item>.carousel-caption>h1 {
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 50px;
+		line-height: 1em;
+		margin-bottom: 20px;
+	}
+	.carousel-inner>.item>.carousel-caption>h3 {
+		font-size: 30px;
+		line-height: 1em;
+		margin-bottom: 40px;
+	}
+	.navbar-static .nav>li>a {
+		padding: 15px 30px 15px 0px;
+	}
+	.carousel-inner>.item>.carousel-caption>a {
+		margin-bottom: 20%;
+	}
+	.team-member1 .team-member1-details p {
+		font-size: 14px;
+	}
+	.section19 .section19-404  h1 {
+		font-size: 20em;
+	}
+	.navbar-brand {
+		margin-left: 0px !important;
+	}
+	.section-10-btn-cont {
+		text-align: right;
+	}
+}
+/* Medium Layout: 1280px. */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+	.carousel-caption {
+		bottom: 80px;
+	}
+	.carousel-inner>.item>.carousel-caption>h1 {
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 40px;
+		line-height: 1em;
+		margin-bottom: 20px;
+	}
+	.carousel-inner>.item>.carousel-caption>h3 {
+		font-style: italic;
+		font-size: 28px;
+		line-height: 1em;
+		margin-bottom: 40px;
+	}
+	.navbar-static .nav>li>a {
+		padding: 15px 30px 15px 0px;
+	}
+	.carousel-inner>.item>.carousel-caption>a {
+		margin-bottom: 20%;
+	}
+	.team-member1 .team-member1-details p {
+		font-size: 14px;
+	}
+	.section19 .section19-404  h1 {
+		font-size: 20em;
+	}
+	.navbar-brand {
+		margin-left: 0px !important;
+	}
+	.section-10-btn-cont {
+		text-align: right;
+		margin: 17px 0 0 0;
+	}
+}
+/* Tablet Layout: 768px. */
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+	.carousel-caption {
+		bottom: 80px;
+	}
+	.carousel-inner>.item>.carousel-caption>h1 {
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 35px;
+		line-height: 1em;
+		margin-bottom: 20px;
+	}
+	.carousel-inner>.item>.carousel-caption>h3 {
+		font-style: italic;
+		font-size: 25px;
+		line-height: 1em;
+		margin-bottom: 40px;
+	}
+	.team-member1 .team-member1-details p {
+		font-size: 14px;
+	}
+	.section19 .section19-404  h1 {
+		font-size: 20em;
+	}
+	.section-10-btn-cont {
+		text-align: left;
+	}
+}
+/* Mobile Layout: 320px. */
+@media only screen and (min-width: 641px) and (max-width: 768px) {
+	.carousel-caption {
+		bottom: 80px;
+	}
+	.carousel-inner>.item>.carousel-caption>h1 {
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 30px;
+		line-height: 1em;
+		margin-bottom: 20px;
+	}
+	.carousel-inner>.item>.carousel-caption>h3 {
+		font-style: italic;
+		font-size: 15px;
+		line-height: 1em;
+		margin-bottom: 30px;
+	}
+}
+/* Mobile Layout: 320px. */
+@media only screen and (max-width: 767px) {
+	.team-member1 .team-member1-details p {
+		font-size: 12px;
+	}
+	.section19 .section19-404  h1 {
+		font-size: 10em;
+	}
+	.navbar-brand {
+		margin-left: 15px !important;
+	}
+	.section-10-btn-cont {
+		text-align: left;
+		margin: 17px 0 0 0;
+	}
+}
+/* Wide Mobile Layout: 480px. */
+@media only screen and (min-width: 481px) and (max-width: 640px) {
+	.carousel-caption {
+		bottom: 80px;
+	}
+	.carousel-inner>.item>.carousel-caption>h1 {
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 30px;
+		line-height: 1em;
+		margin-bottom: 20px;
+	}
+	.carousel-inner>.item>.carousel-caption>h3 {
+		font-style: italic;
+		font-size: 15px;
+		line-height: 1em;
+		margin-bottom: 30px;
+	}
+	.team-member1 .team-member1-details p {
+		font-size: 12px;
+	}
+	.section19 .section19-404  h1 {
+		font-size: 10em;
+	}
+	.navbar-brand {
+		margin-left: 15px !important;
+	}
+	.section-10-btn-cont {
+		text-align: left;
+		margin: 17px 0 0 0;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.carousel-caption {
+		bottom: 55px;
+	}
+	.carousel-inner>.item>.carousel-caption>h1 {
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 22px;
+		line-height: 1em;
+		margin-bottom: 20px;
+	}
+	.carousel-inner>.item>.carousel-caption>h3 {
+		font-style: italic;
+		font-size: 14px;
+		line-height: 1em;
+		margin-bottom: 20px;
+	}
+	.carousel-caption .btn {
+		margin-bottom: 20px;
+	}
+}

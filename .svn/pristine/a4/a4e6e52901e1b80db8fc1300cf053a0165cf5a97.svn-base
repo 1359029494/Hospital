@@ -1,0 +1,27 @@
+package com.hospital.vo;
+
+public class CarHelp {
+	private String drugid;
+	private int drnumber;
+	public String getDrugid() {
+		return drugid;
+	}
+	public void setDrugid(String drugid) {
+		this.drugid = drugid;
+	}
+	public int getDrnumber() {
+		return drnumber;
+	}
+	public void setDrnumber(int drnumber) {
+		this.drnumber = drnumber;
+	}
+	public CarHelp(String drugid, int drnumber) {
+		super();
+		this.drugid = drugid;
+		this.drnumber = drnumber;
+	}
+	public CarHelp() {
+		super();
+	}
+	
+}

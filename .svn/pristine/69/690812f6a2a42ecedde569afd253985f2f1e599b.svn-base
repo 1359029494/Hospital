@@ -1,0 +1,463 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<!-- Site Title   -->
+<title>关于我们</title>
+<!-- Fav Icons   -->
+<link rel="icon" href="images/a0.jpg" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+<script src="js/iconfont.js" type="text/javascript" charset="utf-8"></script>
+<link rel="icon" href="images/favicon.png" type="image/x-icon">
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<!-- Fonts Awesome -->
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<!-- Google Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,800italic,800,600italic,600,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<!-- animate Effect -->
+<link href="css/animate.css" rel="stylesheet">
+<!-- Main CSS -->
+<link href="css/style.css" rel="stylesheet">
+<!-- Responsive CSS -->
+<link href="css/responsive.css" rel="stylesheet">
+</head>
+<body>
+<header id="header" class="head">
+  <div class="top-header">
+     <div class="container">
+       <div class="row ">
+         <ul class="contact-detail2 col-md-6 pull-left">
+           <li> <a href="contact.jsp" ><i class="fa fa-mobile"></i>Call US + (81) 178 614 4707</a> </li>
+           <li> <a href="contact.jsp"><i class="fa fa-envelope-o"></i> 1441043674@qq.com</a> </li>
+         </ul>
+         <div class="social-links col-md-6 pull-right">
+           <ul class="social-icons pull-right">
+             <!--<li> <a href="#" target="_blank"><i class="fa fa-facebook"></i></a> </li>
+             <li> <a href="#" target="_blank"><i class="fa fa-twitter"></i></a> </li>
+             <li> <a href="#" target="_blank"><i class="fa fa-pinterest"></i></a> </li>
+             <li> <a href="#" target="_blank"><i class="fa fa-skype"></i></a> </li>
+             <li> <a href="#" target="_blank"><i class="fa fa-dribbble"></i></a> </li>-->
+           </ul>
+         </div>
+       </div>
+     </div>
+    </div>
+    <nav class="navbar navbar-default navbar-menu">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
+            <span class="sr-only">Toggle navigation</span> 
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span> 
+          </button>
+          <a class="navbar-brand" href="index.jsp">
+            <div class="logo-text"><span><samp><i class="iconfont icon-hospital" style="line-height: 40px;font-size: 40px;"></i></samp>工大校医</span></div>
+            <!-- <img src="images/logo.png" alt="logo"> ﹠-->
+          </a> 
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" data-hover="dropdown" data-animations="fadeIn">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="index.jsp">主页</a></li>
+            <li><a href="aboutus.jsp">关于我们 </a></li>
+      		<li><a href="contact.jsp">反馈意见 </a></li>
+         <c:choose>
+            <c:when test="${empty user_pat}">
+                <li><a href="parlogin.jsp">注册/登录</a>
+                </li>
+            </c:when>
+            <c:otherwise>
+                <li><a href="myself.jsp"><c:out value="${user_pat.patname }"></c:out></a></li>
+                <li><a href="../dozhuxiao">退出登录</a>
+                </li>
+            </c:otherwise>
+        </c:choose>
+          </ul>
+        </div>
+        <!--/.nav-collapse --> 
+      </div>
+    </nav>
+</header>
+<section id="inner-title" class="inner-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-6"><h2>关于我们</h2></div>
+      <div class="col-md-6 col-lg-6">
+        <div class="breadcrumbs">
+          <ul>
+            <li>当前页:</li>
+            <li><a href="index.jsp">主页</a></li>
+            <li><a href="aboutus.jsp">关于我们</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 
+<section id="section18" class="section-margine">
+  <div class="container">
+  <div class="section18">
+    <div class="row">
+      <div class="col-md-8 col-lg-8 wow fadeInUp">
+        <div class="textcont">
+          <h3>医院简介</h3>
+          <p> 齐鲁工业大学校医院成立于1948年，一所集医疗、教学、科研、康复、保健、预防、
+          	急救于一体的大型综合性校医院，并先后荣获“山东省学生放心示范校医院”“山东省校医院文化建设先进单位”
+          	“山东省创先争优先进基层党组织”“省级文明单位”“人文爱心医院”等荣誉称号。</br>
+          	目前，医院占地7万余平方米，建筑总面积23万余平方米，设有临床、医技科室141个，开放床位2813张。
+          	现有在职职工3607人，拥有副高级以上专业技术人员470人，其中双聘院士5人，泰山学者8人，全国卫生系统先进工作者2人，
+          	享受国务院政府特殊津15人，省部级有突出贡献中青年专家 3人，山东省专业技术拔尖人才2人，入选国家百千万人才计划1人，
+          	国家自然科学基金委员会学科评审组二审专家2人，省中青年科技重点人才1人，山东大学教授30人，博士生导师53人，
+          	硕士生导师402人次，省医学会、医师协会主委32人。
+          	</p>
+          <h3>医院文化</h3>
+          <p style="color:#00AEF0">医训：厚德行医 医德共济</p>
+          <p> 医院宗旨：以促进和发展健康产业为己任，让生命因我们的存在更璀璨。</p>
+          <p> 医院精神：无限忠诚的主人翁精神；紧密协作的团队精神；超前持续的创新精神；主动优质的服务精神；百折不挠的拼搏精神：追求卓越的管理精神。</p>
+          <p> 医院价值观：生命健康是对企业价值最大的认可；服务满意是对我们工作的最高奖赏</p>
+          <h4>生活小科士</h4>
+          <p>经常熬夜的人一定注意通过食物调节身体<br />
+					1．猕猴桃、猪脚可以呵护皮肤<br />
+					2．绿茶、枸杞能够养肝明目<br />
+					3．鸡蛋、燕麦帮助补充大脑营养<br />
+					4．香菇、干红葡萄酒消除腹部脂肪堆积<br />
+					5．山药、杜仲可以滋养肾气<br />
+					6．苹果、冬瓜消肿利尿，三文鱼、酸奶防止肌肉萎缩</p>
+        </div>  
+      </div>
+      <div class="col-md-4 col-lg-4 wow fadeInUp" data-wow-delay=".2s">
+        <div class="section-18-img">
+          <img src="images/a0.jpg"  class="img-responsive" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="row mission-vision">
+      <div class="col-sm-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+        <figure>
+          <img src="images/a2.jpg"  class="img-responsive" alt="">
+        </figure>
+        <h4>科普教育</h4>
+        <p>红葡萄皮上有种东西叫“逆转醇” ，它可以抗衰老，是抗氧化剂，常喝红葡萄酒的人不得心脏病．还有它可以帮助防止心脏的突然停搏。每天喝葡萄酒不超过５０－１００毫升，不会喝酒的，可以吃红葡萄不吐葡萄皮，都是一样保健的。红葡萄酒还有个作用是降血压。</p>
+      </div>
+      <div class="col-sm-6 col-md-6 wow fadeInUp" data-wow-delay=".4s">
+        <figure>
+          <img src="images/a1.jpg"  class="img-responsive" alt="">
+        </figure>
+        <h4></h4>
+         <h4>科普教育</h4>
+        <p>酸奶是维持细菌平衡的.所谓维持细菌平衡是指有益的细菌生长，有害的细菌消灭，所以吃酸奶可以少得病。 （牛奶里含的是乳糖，对乳糖吸收最大的是白种人，在亚洲黄种人中有７０％不吸收乳糖。所以牛奶虽好，但喝得再多，不吸收还是没用－－－牛奶不是不可以喝，喝的时候，适当加点豆浆。</p>
+      </div>
+    </div>
+  </div>  
+  </div>
+</section>
+
+<section id="section3" class="section-margine section3-background">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <div class="section-3-box">
+          <figure><i class="fa fa-desktop fa-2x"></i></figure>
+          <h3><span class="counter">100</span>+</h3>
+          <h4>医生 & 护士</h4>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="section-3-box">
+          <figure><i class="fa fa-group fa-2x"></i></figure>
+          <h3><span class="counter">5000</span>+</h3>
+          <h4>接诊患者数量</h4>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="section-3-box">
+          <figure><i class="fa fa-coffee fa-2x"></i></figure>
+          <h3><span class="counter">50</span>+</h3>
+          <h4>医院连锁</h4>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="section-3-box">
+          <figure><i class="fa fa-glass fa-2x"></i></figure>
+          <h3><span class="counter">400</span>+</h3>
+          <h4>获奖数量</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section  id="section5" class="section-5 section-margine">
+  <div class="container">
+    <div class="row my-team">
+      <div class="col-md-12">
+        <header class="title-head">
+          <h2>建设新时代国内一流强院</h2>
+          <div class="line-heading">
+            <span class="line-left"></span>
+            <span class="line-middle">+</span>
+            <span class="line-right"></span>
+          </div>
+        </header>
+      </div>
+      <div class="col-md-3 col-sm-6 my-team-member wow fadeInUp">
+        <div class="my-member-img">
+          <img src="images/team/1.jpg" class="img-responsive" alt="team01">
+        </div>
+        <div class="my-team-detail text-center">
+          <h4 class="my-member-name">黄成兴</h4>
+          <p class="my-member-post">院长</p>  
+          <div class="my-member-social">
+            <ul>
+              <li><a href="#" target="_blank"><i class="fa fa-envelope"></i></a></li>
+              <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>        
+        </div>        
+      </div>
+      <div class="col-md-3 col-sm-6 my-team-member wow fadeInUp" data-wow-delay=".2s">
+        <div class="my-member-img">
+          <img src="images/team/2.jpg" class="img-responsive" alt="team02">
+        </div>
+        <div class="my-team-detail text-center">
+          <h4 class="my-member-name">刘文浩</h4>
+          <p class="my-member-post">副院长</p>
+          <div class="my-member-social">
+            <ul>
+              <li><a href="#" target="_blank"><i class="fa fa-envelope"></i></a></li>
+              <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>        
+      </div>
+      <div class="col-md-3 col-sm-6 my-team-member wow fadeInUp" data-wow-delay=".3s">
+        <div class="my-member-img">
+          <img src="images/team/3.jpg" class="img-responsive" alt="team03">
+        </div>
+        <div class="my-team-detail text-center">
+          <h4 class="my-member-name">马云</h4>
+          <p class="my-member-post">车间主任</p>
+          <div class="my-member-social">
+            <ul>
+              <li><a href="#" target="_blank"><i class="fa fa-envelope"></i></a></li>
+              <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>          
+      </div>
+      <div class="col-md-3 col-sm-6 my-team-member wow fadeInUp" data-wow-delay=".2s">
+        <div class="my-member-img">
+          <img src="images/team/4.jpg" class="img-responsive" alt="team04">
+        </div>
+        <div class="my-team-detail text-center">
+          <h4 class="my-member-name">刘铠熔</h4>
+          <p class="my-member-post">财务大臣</p>         
+          <div class="my-member-social">
+            <ul>
+              <li><a href="#" target="_blank"><i class="fa fa-envelope"></i></a></li>
+              <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="section10" class="section-10-background">
+  
+</section>
+<section id="section14" class="section-margine">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <header class="title-head">
+          <h2>医院风采</h2>
+          <div class="line-heading">
+            <span class="line-left"></span>
+            <span class="line-middle">+</span>
+            <span class="line-right"></span>
+          </div>
+        </header>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-lg-4">
+        <div class="section-14-box wow fadeInUp">
+          <img src="images/blog/blog-1.jpg" class="img-responsive" alt="Blog image 1">
+          <h3><a href="#">药物研究</a></h3>
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="comments">
+                <a class="btn btn-primary btn-sm">7月 30日</a>
+                <a  class="btn btn-primary btn-sm">更多</a>
+              </div>
+            </div>
+          </div>
+          <p>集中力量投入抗“超级细菌”药物研究联合攻关，重点开展“超级细菌靶标确证及感染机制研究”“抗超级细菌药物筛选模型的建立”“抗超级细菌化合物的设计与筛选”和“大规模化合物样品的合成”的研究。</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4">
+        <div class="section-14-box wow fadeInUp" data-wow-delay=".2s">
+          <h3><a href="#">健康咨询</a></h3>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="comments">
+                <a class="btn btn-primary btn-sm">1月 8日</a>
+                <a  class="btn btn-primary btn-sm">更多</a>
+              </div>
+            </div>
+          </div>
+          <p>优质生活从这里开始，传递最新最热的健康资讯，打造全国第一保健养生平台，提供最全面的健康营品，让我们成为你身边的私人健康顾问。<br /><br /></p>
+          <img src="images/blog/blog-2.jpg" class="img-responsive" alt="Blog image 1">
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4">
+        <div class="section-14-box wow fadeInUp" data-wow-delay=".3s">
+          <img src="images/blog/blog-3.jpg" class="img-responsive" alt="Blog image 1">
+          <h3><a href="#">我们的合作</a></h3>
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="comments">
+                <a class="btn btn-primary btn-sm">1月 1日</a>
+                <a class="btn btn-primary btn-sm">更多</a>
+              </div>
+            </div>
+          </div>
+          <p><br /><br />阿里云合作伙伴生态提供全方位的合作与支持，致力于帮助合作伙伴构建基于阿里云的业务实践和解决方案。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="footer-top" class="footer-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-lg-3">
+        <div class="footer-top-box">
+          <h4>关于我们</h4>
+          <p> 医院宗旨：以促进和发展健康产业为己任，让生命因我们的存在更璀璨。</p></br>
+          <p> 医院精神：无限忠诚的主人翁精神；紧密协作的团队精神；超前持续的创新精神；主动优质的服务精神；百折不挠的拼搏精神：追求卓越的管理精神。</p></br>
+          <p> 医院价值观：生命健康是对企业价值最大的认可；服务满意是对我们工作的最高奖赏</p></br>
+        </div>
+        <div class="footer-top-box">
+          <h4>办公时间</h4>
+          <b>上午 :</b> 8：00时—11：30时<br/>
+          <b>下午 :</b>14：00时—17：00时
+        </div>
+      </div>
+      <div class="col-md-3 col-lg-3">
+        <div class="footer-top-box">
+          <h4>咨讯焦点</h4>
+          <ul>
+            <li>
+              <div class="recent-post-widget">
+                <a href="#" class="widget-img-thumb">
+                  <img src="images/post-1.jpg" class="img-responsive">
+                </a>
+                <div class="widget-content">
+                  <h5><a href="#" class="sidebar-item-title">最新药物研究</a></h5>
+                  <a href="#">
+                    <p class="widget-date">发帖：3天前</p>
+                  </a>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </li>
+            <li>
+              <div class="recent-post-widget">
+                <a href="#" class="widget-img-thumb">
+                  <img src="images/post-2.jpg" class="img-responsive">
+                </a>
+                <div class="widget-content">
+                  <h5><a href="#" class="sidebar-item-title">医疗器械</a></h5>
+                  <a href="#">
+                    <p class="widget-date">发帖: 6个月前</p>
+                  </a>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3 col-lg-3">
+        <div class="footer-top-box">
+          <h4>医疗特色</h4>
+          <div class="tag"><a href="#">针灸</a></div>
+          <div class="tag"><a href="#">x光检查</a></div>
+          <div class="tag"><a href="#">健康保健学</a></div>
+          <div class="tag"><a href="#">艾滋病教育</a></div>
+          <div class="tag"><a href="#">心理辅导</a></div>
+        </div>
+      </div>
+      <div class="col-md-3 col-lg-3">
+        <div class="footer-top-box">
+          <h4>联系我们</h4>
+          <p><b>地址 : 山东省济南市长清区</b>齐鲁工业大学<br/>
+            <b>电话: </b> +178 614 4707<br/>
+            <b>邮箱: </b> 1441043674@qq.com </p>
+        </div>
+        <div class="footer-top-box">
+          <h4>订阅</h4>
+          <div class="cs-form">
+            <form action="#" method="post">
+              <div class="input-holder">
+                <input type="email" placeholder="输入有效电子邮件地址">
+                <label> <i class="fa fa-location-arrow fa-2x"></i>
+                  <input class="submit-bgcolor" type="submit" value="submit">
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="footer-bottom" class="footer-bottom">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-lg-3">
+        <ul class="list-inline social-buttons">
+          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="js/jquery.min.js"></script> 
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.plugin.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script> 
+<script src="js/jquery.magnific-popup.min.js"></script> 
+<script src="js/bootstrap-dropdownhover.min.js"></script>
+<script src="js/wow.min.js"></script> 
+<script src="js/waypoints.min.js"></script> 
+<script src="js/jquery.counterup.min.js"></script> 
+<script src="js/main.js"></script>
+</body>
+</html>

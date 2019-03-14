@@ -1,0 +1,244 @@
+package com.hospital.dao;
+
+import java.util.List;
+
+import com.hospital.db.DBManager;
+import com.hospital.mapper.IMapper;
+import com.hospital.mapper.OrdersMapper;
+import com.hospital.vo.Orders;
+
+//订单表的DAO
+public class OrdersDAO {
+	//增加订单
+	public int save(Orders o) throws Exception{
+		String sql = "insert into Orders values(orid.nextval,?,?,?,?,?,?,?)";
+		Object []params = {
+				o.getOrnumber(),
+				o.getDrid(),
+				o.getDrnumber(),
+				o.getOrprice(),
+				o.getPatid(),
+				o.getOrstate(),
+				o.getOrdate()
+		};
+		DBManager db = new DBManager();
+		int retn = db.executeUpdate(sql, params);
+		return retn;
+	}
+	//删除订单  通过订单的ID
+	public int delete(Orders o) throws Exception{
+		String sql = "delete from Orders where orid = ?";
+		Object []params={
+				o.getOrid()
+		};
+		DBManager db=new DBManager();
+		int retn=db.executeUpdate(sql, params);
+		return retn;
+	}
+	//查询总条数
+	public int getTotal() throws Exception{
+		String sql=" select count(*) from orders ";
+		Object []params=null;
+		DBManager db=new DBManager();
+		int total=db.executeQueryJvHe(sql, params);
+		return total;
+	}
+	//查询订单表 分页查询 查询出全部信息 
+	/*
+	 修改：将分页查询的查询语句加了 order by ordate:将查询出来的数据按日期由小到大排序
+	 修改人：陈雪冰
+	 */
+	public List<Orders> findByPage(int pagenow, int pagesize) throws Exception{
+		int start=(pagenow-1)*pagesize;
+		String sql = " select *from (select rownum rn,o.* from Orders o) where rn>? and rownum<=? order by ordate";
+		Object []params = {
+			start,
+			pagesize
+		};
+		IMapper mapper = new OrdersMapper();
+		DBManager db = new DBManager();
+		List<Orders> list = db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+	
+	//查询所有数据
+	public List<Orders> findAll() throws Exception{
+		String sql = "select *from orders";
+		Object []params = {
+			
+		};
+		IMapper mapper = new OrdersMapper();
+		DBManager db = new DBManager();
+		List<Orders> list = db.executeQueryObjectList(sql, null, mapper);
+		return list;
+	}
+	//修改订单信息 通过订单ID,获取订单信息 并修改
+	public int merge(Orders o) throws Exception{
+		String sql=" update Orders set ornumber=?,drid=?,drnumber=?,orprice=?,patid=?,ordate=?,orstate=? where orid=? ";
+		Object []params={
+				o.getOrnumber(),
+				o.getDrid(),
+				o.getDrnumber(),
+				o.getOrprice(),
+				o.getPatid(),
+				o.getOrstate(),
+				o.getOrdate(),
+				o.getOrid()
+		};
+		DBManager db=new DBManager();
+		int retn=db.executeUpdate(sql, params);
+		return retn;
+	}
+	//通过订单ID 直接查询该订单的所有信息
+	public Orders findById(int drid) throws Exception{
+		String sql="select *from Orders where orid=?";
+		Object []params={
+				drid
+		};
+		IMapper mapper=new OrdersMapper();
+		DBManager db=new DBManager();
+		List<Orders> list=db.executeQueryObjectList(sql, params, mapper);
+		Orders d=list.get(0);
+		return d;
+	}
+	//通过订单编号 直接查询该订单的所有信息
+	public List<Orders> findBynumber(int ornumber) throws Exception{
+		String sql="select *from Orders where ornumber=?";
+		Object []params={
+				ornumber
+		};
+		IMapper mapper=new OrdersMapper();
+		DBManager db=new DBManager();
+		List<Orders> list=db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+
+	
+	//查询某一天的订单量
+	public int findByTime(String ordate) throws Exception{
+		String sql="SELECT COUNT (*) FROM ORDERS WHERE TRUNC (ORDATE) ＝to_date (?, 'yyyy-mm-dd')";
+		Object []params={
+				ordate
+		};
+		DBManager db=new DBManager();
+		int total=db.executeQueryYC(sql, params);
+		return total;
+	}
+	
+	//查询最近七天的订单信息
+	public List<Orders> findTimeAll() throws Exception{
+		String sql="select * from ORDERS where ORDATE >= trunc(sysdate - 7) ORDER BY ORDATE";
+		Object []params={
+				
+		};
+		IMapper mapper=new OrdersMapper();
+		DBManager db=new DBManager();
+		List<Orders> list=db.executeQueryObjectList(sql, null, mapper);
+		return list;
+	}
+	/*
+	 根据患者的id查询以往的订单
+	 增加者：陈雪冰 2018/12/13
+	 */
+	public List<Orders> findByPageForOldOrder(int patid,int pagenow, int pagesize) throws Exception{
+		int start=(pagenow-1)*pagesize;
+		String sql = " select *from (select rownum rn,o.* from Orders o where patid=?) where rn>? and rownum<=? order by ordate desc";
+		Object []params = {
+			patid,
+			start,
+			pagesize
+		};
+		IMapper mapper = new OrdersMapper();
+		DBManager db = new DBManager();
+		List<Orders> list = db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+	/*
+	 根据患者的id查询以往的订单
+	 增加者：岳晨 2018/12/27
+	 */
+	public List<Orders> findByForOldOrder(int patid) throws Exception{
+		String sql = " select *from orders where patid=? order by ordate desc";
+		Object []params = {
+			patid,
+		};
+		IMapper mapper = new OrdersMapper();
+		DBManager db = new DBManager();
+		List<Orders> list = db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+	/*
+	 查询户患者以往订单的总条数
+	 增加者：陈雪冰
+	 */
+	public int getTotalOldOrder(int patid) throws Exception{
+		String sql=" select count(*) from orders where patid=?";
+		Object []params= {patid};
+		DBManager db=new DBManager();
+		int total=db.executeQueryJvHe(sql, params);
+		return total;
+	}
+	/*
+	 未支付订单的分页查询
+	修改者： 陈雪冰 2018/12/13
+	 */
+	public List<Orders> findByPageForUnpay(int patid ,int pagenow, int pagesize) throws Exception{
+		int start=(pagenow-1)*pagesize;
+		String sql = " select *from (select rownum rn,o.* from Orders o where orstate=0 and patid=?) where rn>? and rownum<=? order by ordate desc";
+		Object []params = {
+			patid,
+			start,
+			pagesize
+		};
+		IMapper mapper = new OrdersMapper();
+		DBManager db = new DBManager();
+		List<Orders> list = db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+	/*
+	 查询未支付订单的总条数
+	 增加者：陈雪冰
+	 */
+	public int getTotalUnpayOrder(int patid) throws Exception{
+		String sql=" select count(*) from orders where orstate=0 and patid=?";
+		Object []params= {patid};
+		DBManager db=new DBManager();
+		int total=db.executeQueryJvHe(sql, params);
+		return total;
+	}
+	//只修改是否缴费列
+	public int mergetodingdan(Orders o) throws Exception{
+		String sql=" update Orders set orstate=? where orid=? ";
+		Object []params={
+				o.getOrdate(),
+				o.getOrid()
+		};
+		DBManager db=new DBManager();
+		int retn=db.executeUpdate(sql, params);
+		return retn;
+	}
+	
+	/*
+	 查询患者未支付订单
+	 增加者:岳晨
+	 */
+	public List<Orders> getNoPay(int patid) throws Exception{
+		String sql=" select * from orders where orstate=0 and patid=?";
+		Object []params= {patid};
+		IMapper mapper = new OrdersMapper();
+		DBManager db=new DBManager();
+		List<Orders> list=db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+	
+	//只修改是否缴费列2
+		public int mergeStateTo1(int patid) throws Exception{
+			String sql=" update Orders set orstate=1 where patid=? ";
+			Object []params={
+					patid
+			};
+			DBManager db=new DBManager();
+			int retn=db.executeUpdate(sql, params);
+			return retn;
+		}
+}

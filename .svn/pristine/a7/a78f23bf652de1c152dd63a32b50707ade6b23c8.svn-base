@@ -1,0 +1,114 @@
+package com.hospital.doctor_action;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.hospital.dao.MedicalRecordDAO;
+import com.hospital.dao.OrdersDAO;
+import com.hospital.dao.RegisterDAO;
+import com.hospital.vo.MedicalRecord;
+import com.hospital.vo.Orders;
+import com.hospital.vo.Register;
+
+/**
+ * Servlet implementation class DoDocMedicalRecord
+ */
+public class DoDocMedicalRecord extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DoDocMedicalRecord() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+//		//System.out.println("我接收到数据了！");
+		
+		//添加病历表
+		MedicalRecord m=new MedicalRecord();
+		MedicalRecordDAO medao=new MedicalRecordDAO();
+		String strdate=request.getParameter("time");
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date date=sdf.parse(strdate);
+			java.sql.Date sdate=new java.sql.Date(date.getTime());
+			m.setMedate(sdate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		String patid=request.getParameter("patid");
+		System.out.println(patid);
+		m.setPatid(Integer.parseInt(patid));
+		m.setMepatage(Integer.parseInt(request.getParameter("patage")));
+		m.setPatsymptom(request.getParameter("patsymptomg"));
+		m.setDocdiagnosis(request.getParameter("docdiagnosis"));
+		m.setMedocname(request.getParameter("docname"));
+		//m.setDruglist(request.getParameter("druglist"));
+		
+		try {
+			medao.save(m);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("病历添加成功");
+		
+		//添加订单表
+		Orders o=new Orders();
+		OrdersDAO ordao=new OrdersDAO();
+		o.setOrinformation(request.getParameter("druglist"));
+		//总价待实现
+		//o.setOrprice(orprice);
+		try {
+			Date date2=sdf.parse(strdate);
+			java.sql.Date sdate2=new java.sql.Date(date2.getTime());
+			o.setOrdate(sdate2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		o.setPatid(Integer.parseInt(patid));
+		o.setOrstate(0);
+		try {
+			ordao.save(o);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("订单添加成功");
+		
+		//从挂号表里删除已经接诊完的患者挂号
+		Register r=new Register();
+		RegisterDAO regdao=new RegisterDAO();
+		int regid=Integer.parseInt(request.getParameter("regid"));
+		System.out.println(regid);
+		r.setRegid(regid);
+		try {
+			regdao.delete(r);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher("doc_hospital/docindex.jsp");
+	}
+
+}

@@ -1,0 +1,318 @@
+<%@page import="com.hospital.dao.DrugDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.hospital.vo.Drug"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="pat_hospital/jquery-ui/themes/base/jquery.ui.all.css">
+		<link rel="stylesheet" href="pat_hospital/jquery-ui/demos.css">
+		<link rel="stylesheet" href="pat_hospital/css/iconfont.css">
+		<link type="text/css" rel="stylesheet" href="pat_hospital/css/emailAutoComple.css">
+		<link rel="stylesheet" type="text/css" href="pat_hospital/css/main.css" />
+		<link rel="icon" href="pat_hospital/images/a0.jpg" type="image/x-icon">
+			<!-- Bootstrap -->
+		<link href="pat_hospital/css/bootstrap.min.css" rel="stylesheet">
+		<link href="pat_hospital/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="pat_hospital/css/iconfont.css"/>
+		<script src="pat_hospital/js/iconfont.js" type="text/javascript" charset="utf-8"></script>
+		
+		<!-- Fonts Awesome -->
+		<link href="pat_hospital/css/font-awesome.min.css" rel="stylesheet">
+		<!-- Google Fonts -->
+		<link type="text/css" rel="stylesheet" href="pat_hospital/doctorpage/css/reset.css" />
+		<link type="text/css" rel="stylesheet" href="pat_hospital/doctorpage/css/1024_768.css" />
+		<link type="text/css" rel="stylesheet" media="screen and (min-width:861px) and (max-width:960px)" href="pat_hospital/doctorpage/css/pad_heng.css" />
+		<link type="text/css" rel="stylesheet" media="screen and (min-width:601px) and (max-width:860px)" href="pat_hospital/doctorpage/css/pad.css" />
+		<link type="text/css" rel="stylesheet" media="screen and (min-width:481px) and (max-width:600px)" href="pat_hospital/doctorpage/css/tel_heng.css" />
+		<link type="text/css" rel="stylesheet" media="screen and (max-width:480px)" href="pat_hospital/doctorpage/Css/tel.css" />
+		<!-- animate Effect -->
+		<!-- Main CSS -->
+		<link href="pat_hospital/css/style.css" rel="stylesheet">
+		<!-- Responsive CSS -->
+		<link href="pat_hospital/css/responsive.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="pat_hospital/css/par7.css"/>
+		<style type="text/css">
+		<style type="text/css">
+			.icon {
+		       width: 1em; height: 1em;
+		       vertical-align: -0.15em;
+		       fill: currentColor;
+		       overflow: hidden;
+	   		}
+	   		 .register:hover{
+	   		 	box-shadow: #00BFFF 0 0 10px;
+	   		 }
+			body {
+	 			background-color: #f5f4f4;
+	 			background-size:cover;
+			}
+			.demo{width:80%; margin:20px auto}
+			.demo h3{height:32px; line-height:32px}
+			.demo p{line-height:24px}
+			pre{margin-top:10px; padding:6px; background:#f7f7f7}
+			.div_message{
+				margin-top: 0px;
+				float: left;
+				margin-left: 15%;
+				background-color:rgba(0,0,0,0.1) ;
+				/*padding-left: 60px;*/
+				
+				height: 850px;
+				width: 70%;
+				margin-bottom: 30px;
+				/*padding-top: 60px;*/
+				border: transparent;
+				box-shadow:black 0 0 5px ;
+				border-top:#00AEF0 solid 6px;
+				
+				border-radius: 5px;
+				
+				border-top-left-radius:0px;
+				border-top-right-radius:0px;
+				text-align:center;
+				
+			}
+			.content{
+				height:650px;
+				margin: 70px;
+				margin-top: 100px;
+				margin-bottom: 0px;
+			}
+			.footer_input {
+				width: 10%;	
+				height: 30px;
+			}
+			.toolbar_btn a span {
+			    font-size: 10px;
+			    line-height: 11px;
+			    position: absolute;
+			    z-index: 3;
+			    top: 10px;
+			    right: 10px;
+			    display: none;
+			    overflow: hidden;
+			    min-width: 11px;
+			    height: 14px;
+			    padding: 1px 2px;
+			    text-align: center;
+			    color: #fff;
+			    border: 1px solid #e50000;
+			    border-radius: 10px;
+			    background: #e50000;
+			
+			}
+			.icon-yaowan{
+				top: -10px;
+				left: 10px;
+				position: absolute;
+			}
+		</style>
+		<script type="text/javascript" src="pat_hospital/js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="pat_hospital/js/jquery.cityselect.js"></script>
+		<script type="text/javascript">
+		
+				
+				function gotopage(){
+					var page=document.getElementById("pageValue").value;
+					if(page> ${totalpage } ||  page<=0 ){
+						window.alert(page);
+						document.getElementById("pageValue").value=${pagenow}
+						return ;
+					}
+						window.location.href="domedicine?pagenow="+page;
+				}
+				function addcar(id){
+					var x;
+					var drug_bool = "#buy_car_"+id;
+					$.get("dodrugcar",{drug_drid:id},function(data){
+						x=data;
+						$("#lmliCount").html(x);
+					});
+					$(drug_bool).removeAttr("onclick");
+					$(drug_bool).css({"background-image":"linear-gradient(#888, #888)",
+						"border":"#888"});
+				}
+				
+				
+		</script>
+		<script src="pat_hospital/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+	</style>
+	 <script src="pat_hospital/js/iconfont.js"></script>
+	
+	</head>
+	<body onload="start_search()">
+<header id="header" class="head">
+  <div class="top-header">
+     <div class="container">
+       <div class="row ">
+         <ul class="contact-detail2 col-md-6 pull-left">
+           <li> <a href="#" target="_blank"><i class="fa fa-mobile"></i>Call US + (81) 178 614 4707</a> </li>
+           <li> <a href="#" target="_blank"><i class="fa fa-envelope-o"></i> 1441043674@qq.com</a> </li>
+         </ul>
+         <div class="social-links col-md-6 pull-right">
+           <ul class="social-icons pull-right">
+             <!--<li> <a href="#" target="_blank"><i class="fa fa-facebook"></i></a> </li>
+             <li> <a href="#" target="_blank"><i class="fa fa-twitter"></i></a> </li>
+             <li> <a href="#" target="_blank"><i class="fa fa-pinterest"></i></a> </li>
+             <li> <a href="#" target="_blank"><i class="fa fa-skype"></i></a> </li>
+             <li> <a href="#" target="_blank"><i class="fa fa-dribbble"></i></a> </li>-->
+           </ul>
+         </div>
+       </div>
+     </div>
+    </div>
+    <nav class="navbar navbar-default navbar-menu">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
+            <span class="sr-only">Toggle navigation</span> 
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span> 
+          </button>
+          <a class="navbar-brand" href="pat_hospital/index.jsp">
+            <div class="logo-text"><span><samp><i class="iconfont icon-hospital" style="line-height: 40px;font-size: 40px;"></i></samp>工大校医</span></div>
+            <!-- <img src="images/logo.png" alt="logo"> -->
+          </a> 
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" data-hover="dropdown" data-animations="fadeIn">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="pat_hospital/index.jsp">主页</a></li>
+            <li><a href="pat_hospital/aboutus.jsp">关于我们 </a></li>
+            <li><a href="pat_hospital/contact.jsp">反馈意见 </a></li>
+            <c:choose>
+      <c:when test="${empty user_pat}">
+                <li><a href="pat_hospital/parlogin.jsp">注册/登录</a>
+                </li>
+            </c:when>
+            <c:otherwise>
+                <li><a href="pat_hospital/myself.jsp">${user_pat.patname }</a></li>
+                <li><a href="dozhuxiao">退出登录</a>
+                </li>
+            </c:otherwise>
+        </c:choose>
+          </ul>
+        </div>
+        <!--/.nav-collapse --> 
+      </div>
+    </nav>
+</header>
+
+
+
+	<div id="" class="toolbar_btn" style="height: 60px;width: 60px;background: #00AEF0 ; float: right;z-index: 2;position: fixed; top: 45%;right: 0px;pos">
+		<a id="" href="pat_hospital/drug_car.jsp" target="_blank">
+			<samp>
+				<i class="iconfont icon-yaowan">
+				</i>
+			</samp>
+			
+			<span id="lmliCount" style="display: block;">
+			<c:if test="${drug_list==null }">
+				0
+			</c:if>
+			<c:if test="${drug_list!=null }">
+				${drug_list.size()}
+			</c:if>
+			</span>
+		</a>
+	</div>
+
+<div>
+<div id="container" style="float: right;padding-right: 14%; margin-top: 20px;">
+    <div class="search style="float:right;" >
+    	<form action="domedicine" method="post"> 
+	        <table border="" cellspacing="" cellpadding=""  >
+	        	
+	        	<tr><td>   <input type="text" placeholder="请输入药品"  id="drugname" style="display: inline;box-shadow: black 0 0 10px;border-radius: 3px;" name="drugname"></td>
+	        		<td width="70px" onclick="searchDrug()" style="background-color: #00AEF0;border-radius: 3px;"> 
+	        			<input type="submit" value="查询" style="background-color: #00AEF0;">
+	        		
+	        		</td>
+	        	</tr>
+	        </table>
+        </form>
+    </div>
+  
+</div>
+	<div class="div_message">
+		<div class="">
+			<div class="content" >
+        	<ul id="show_message" >
+        	<c:forEach items="${list }" var="x">
+        		<li>
+	                <dl>
+                    	<dd><a href="dolookdrug?drugid=${x.drid} " target="_blank"><img src="<c:out value="${x.drphoto }"></c:out>" alt="药品" height="100px"/></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="dolookdrug?drugid=${x.drid} " target="_blank">${x.drname }</a></p>
+                            <p class="book_inline">价格:<c:out value="${x.drprice }"></c:out></p>
+                            <p class="book_inline">库存:<c:out value="${x.drnumber }"></</c:out></p>
+                            <p class="book_inline">描述:<c:out value="${x.dreffect }"></c:out></p>
+                            <c:set value="0" var="bool_drug"></c:set>
+                            <c:forEach items="${drug_list }" var="drug">
+                            	<c:if test="${drug.drid==x.drid }">
+                            		<c:set value="1" var="bool_drug"></c:set>
+                            	</c:if>
+                            </c:forEach>
+                            <c:if test="${bool_drug==1 }">
+                            	<a class="book_buy" id="buy_car_${x.drid}" style="background-image:linear-gradient(#888, #888);border:#888" >添加购物车</a>
+                            </c:if>
+                            <c:if test="${bool_drug==0 }">
+                            	<a class="book_buy" id="buy_car_${x.drid}" href="javascript:;" onclick="addcar(${x.drid})" >添加购物车</a>
+                            </c:if>
+                        </dt>
+                   </dl>
+                </li>
+        	</c:forEach>
+            </ul>
+      </div>
+      <div class="page_content"  id="footer_div" >
+      	<table style="width: 100%;text-align: center;" >
+      	
+      		<tr>
+      			<td style="text-align: center;">
+		      		<c:if test="${pagenow==1 }">
+							首页&nbsp;上一页&nbsp;
+						</c:if>
+						<c:if test="${pagenow!=1 }">
+							<a href="domedicine?pagenow=1">首页</a>
+							<a href="domedicine?pagenow=${pagenow-1 }">上一页</a>
+						</c:if>
+						<c:if test="${pagenow==totalpage }">
+							下一页&nbsp;尾页&nbsp;
+						</c:if>
+						<c:if test="${pagenow!=totalpage }">
+							<a href="domedicine?pagenow=${pagenow+1 }">下一页</a>
+							<a href="domedicine?pagenow=${totalpage }">尾页</a>
+						</c:if> 
+							总<c:out value="${total }"></c:out>条数据&nbsp;&nbsp;第<c:out value="${pagenow }"></c:out>/<c:out value="${totalpage }"></c:out>页&nbsp;&nbsp;
+							
+					    	<input type="text" value="${pagenow }"size="4" id="pageValue" class="footer_input" style="box-shadow: black 0 0 5px;"></input>
+							<input type="button" value="跳转"onclick="gotopage()" class="footer_input"  style="background-color:#00AEF0 ;color: black;box-shadow: black 0 0 5px; ">  
+					</td>
+				</tr>
+			</table>
+      	</div>
+	</div>
+</div>
+
+</body>
+<script src="pat_hospital/js/jquery.min.js"></script> 	
+<script src="pat_hospital/js/bootstrap.min.js"></script>
+<script src="pat_hospital/js/jquery.plugin.min.js"></script>
+<script src="pat_hospital/js/jquery.isotope.min.js"></script> 
+<script src="pat_hospital/js/jquery.magnific-popup.min.js"></script> 
+<script src="pat_hospital/js/bootstrap-dropdownhover.min.js"></script>
+<script src="pat_hospital/js/wow.min.js"></script> 
+<script src="pat_hospital/waypoints.min.js"></script> 
+<script src="pat_hospital/js/jquery.counterup.min.js"></script> 
+<script src="pat_hospital/js/main.js"></script>
+</html>

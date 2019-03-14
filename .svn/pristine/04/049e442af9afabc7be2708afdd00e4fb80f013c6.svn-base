@@ -1,0 +1,55 @@
+package com.hospital.patience_action;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.hospital.dao.OrdersDAO;
+import com.hospital.vo.Orders;
+
+/**
+ * Servlet implementation class DoDingDanUpAction
+ */
+public class DoDingDanUpAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DoDingDanUpAction() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String orstr = (String) session.getAttribute("orid");
+		int orid = new Integer(orstr);
+		Orders o = new Orders();
+		OrdersDAO dao = new OrdersDAO();
+		o.setOrstate(1);
+		o.setOrid(orid);
+		try {
+			dao.mergetodingdan(o);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("msg", "ojbk");
+		request.getRequestDispatcher("pat_hospital/NoDingDan.jsp").forward(request, response);
+	}
+
+}

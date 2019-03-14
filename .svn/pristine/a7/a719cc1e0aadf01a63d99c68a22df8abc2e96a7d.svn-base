@@ -1,0 +1,132 @@
+package com.hospital.admaction;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.hospital.dao.AdminsDAO;
+import com.hospital.vo.Admins;
+
+/**
+ * Servlet implementation class Addadmin
+ */
+public class Addadmin extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    /**
+     * Default constructor. 
+     */
+    public Addadmin() {
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		String path = request.getRealPath("");
+		path += "hos_admin\\admin\\images\\";
+		String admname = null;
+		String admidcard = null;
+		String admphonenumber = null;
+		String admaddress1 = null;
+		String admaddress2 = null;
+		String admaddress = null;
+		int superadmin = 0;
+		String admphoto = null;
+		String admpass = null;
+		ServletFileUpload up=new ServletFileUpload(new DiskFileItemFactory());
+		List<FileItem> list = null;
+		try {
+			list = up.parseRequest(request);
+		} catch (FileUploadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(int i = 0; i < list.size(); i++) {
+			FileItem item = list.get(i);
+			if(item.isFormField()) {
+				String name=item.getFieldName();
+				String value=item.getString("utf-8");
+				if (name.equals("admname")) {
+					admname = value;
+				}
+				if (name.equals("admidcard")) {
+					admidcard = value;
+				}
+				if (name.equals("admaddress")) {
+					admaddress = value;
+				}
+				if (name.equals("admphonenumber")) {
+					admphonenumber = value;
+				}
+					admphonenumber = value;
+				if (name.equals("admaddress1")) {
+					admaddress1 = value;
+				}
+				if (name.equals("admaddress2")) {
+					admaddress2 = value;
+				}
+				System.out.println(admaddress1);
+				admaddress = admaddress1 + admaddress2;
+				if (name.equals("admpass")) {
+					admpass = value;
+				}
+				if (name.equals("superadmin")) {
+					superadmin = new Integer(value);
+				}
+			}else {
+				String name = item.getName();
+				admphoto = "images/"+name;
+				name = path +name;
+				File f = new File(name);
+				try {
+					item.write(f);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		AdminsDAO ad = new AdminsDAO();
+		Admins a = new Admins(admname, admpass, admphoto, null, admidcard, admphonenumber, admaddress, superadmin);
+		int flag = -1;
+		try {
+			flag = ad.save(a);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(flag >= 0) {
+			out.println("<script>");
+			out.println("alert('添加成功！');window.location.href='hos_admin/addadmin.html'");
+			out.println("</script>");
+		}else {
+			out.println("<script>");
+			out.println("alert('添加失败！');window.location.href='hos_admin/addadmin.html'");
+			out.println("</script>");
+		}
+	}
+
+}

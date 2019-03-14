@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>CSS3个人资料填写表单 - 站长素材</title>
+
+<link rel="stylesheet" href="css/styleforupdate.css" media="screen" type="text/css" />
+
+</head>
+
+<body>
+<section class='container'>
+<!-- / Form -->
+<form>
+<!-- / Header -->
+
+<!-- / Fieldset Alpha -->
+<fieldset class='alpha'>
+<legend>修改手机号</legend>
+<div class='frow'>
+<input class='item' placeholder='手机号' type='text'>
+</div>
+<div class='frow' >
+<input class='item' placeholder='验证码' type='text' style="width:200px">
+<input class='yzma' id='yzma' value="获取验证码" type="button" style="width:100px"/>
+</div>
+<div class='frow'>
+<a class='next-step' href='#'>确认修改</a>
+</div>
+</fieldset>
+<!-- / Fieldset Beta -->
+
+<script src='js/jquery.js'></script>
+
+<script src="js/indexforupdate.js"></script>
+</body>
+
+</html>

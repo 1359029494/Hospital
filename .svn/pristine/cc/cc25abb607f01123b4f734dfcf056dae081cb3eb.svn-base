@@ -1,0 +1,129 @@
+package com.hospital.admaction;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.hospital.dao.DoctorDAO;
+import com.hospital.dao.DrugDAO;
+import com.hospital.vo.Drug;
+
+/**
+ * Servlet implementation class TUpmed
+ */
+public class TUpmed extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public TUpmed() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		String path = request.getRealPath("");
+		path += "hos_admin\\admin\\images\\";
+		String drphoto = null;
+		String drname = null;
+		String dreffect = null;
+		double drprice = 0;
+		int drid = 0;
+		int prescription = 0;
+		int drnumber = 0;
+		ServletFileUpload up=new ServletFileUpload(new DiskFileItemFactory());
+		List<FileItem> list = null;
+		try {
+			list = up.parseRequest(request);
+		} catch (FileUploadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for(int i = 0; i < list.size(); i++) {
+			FileItem item = list.get(i);
+			if(item.isFormField()) {
+				String name=item.getFieldName();
+				String value=item.getString("utf-8");
+				if (name.equals("drname")) {
+					drname = value;
+				}
+				if (name.equals("drprice")) {
+					drprice = new Double(value);
+				}
+				if (name.equals("dreffect")) {
+					dreffect = value;
+				}
+				if (name.equals("drid")) {
+					drid = new Integer(value);
+				}
+				if (name.equals("prescription")) {
+					prescription = new Integer(value);
+				}
+				if (name.equals("drnumber")) {
+					drnumber = new Integer(value);
+				}
+			}else {
+				String name = item.getName();
+					drphoto = "images/"+name;
+					name = path +name;
+					File f = new File(name);
+				try {
+					item.write(f);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
+			}
+			Drug d = new Drug(drid, drphoto, drname, drprice, drnumber, dreffect, prescription);
+			DrugDAO dd = new DrugDAO();
+			int flag = -1;
+			try {
+				flag = dd.merge(d);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if(flag >= 0) {
+				out.println("<html>");
+				out.println("<head>");
+				out.println("<meta charset='utf-8' />");
+				out.println("<script>");
+				out.println("alert('修改成功！');window.location.href='/hospital/hos_admin/Managemed'");
+				out.println("</script>");
+				out.println("</head>");
+				out.println("</html>");
+			}else {
+				out.println("<script>");
+				out.println("alert('修改失败！');window.location.href='hos_admin/upmed.jsp' onClick=”javascript :history.back(-1);”");
+				out.println("</script>");
+			}
+		}
+	
+
+}

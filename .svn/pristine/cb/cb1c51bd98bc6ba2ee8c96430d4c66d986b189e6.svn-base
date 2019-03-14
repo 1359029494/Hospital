@@ -1,0 +1,337 @@
+<%@page import="com.hospital.dao.RegisterDAO"%>
+<%@page import="com.hospital.vo.Register"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.hospital.dao.DoctorDAO"%>
+<%@page import="com.hospital.vo.Doctor"%>
+<%@page import="com.hospital.dao.PatientDAO"%>
+<%@page import="com.hospital.vo.Patient"%>
+<%@page import="java.util.Date"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>发布文章-- 媒体开放平台 一点车 - 让您多懂一点车</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link href="iTunesArtwork@2x.png" sizes="114x114"
+	rel="apple-touch-icon-precomposed">
+<link type="text/css" rel="stylesheet" href="admin/css/core.css">
+<link type="text/css" rel="stylesheet" href="admin/css/icon.css">
+<link type="text/css" rel="stylesheet" href="admin/css/home.css">
+<link type="text/css" rel="stylesheet" href="admin/css/liu.css">
+<script type="text/javascript" src="admin/js/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="admin/js/liu.js"></script>
+	
+</head>
+<body onload="todaytime()">
+<!-- head YDC begin -->
+	<header class="ydc-header">
+		<div class="ydc-entered">
+			<div class="ydc-header-content ydc-flex">
+				<div class="ydc-column">
+					<a href="doc-index.html" class="ydc-column-ydc-logo">
+						<img src="admin/images/icon/ydc-logo.png" title="" about="" alt="">
+					<a href="index.html" class="ydc-column-ydc-logo"> <img
+						src="admin/images/icon/ydc-logo.png" title="" about="" alt="">
+					</a>
+				</div>
+				<div class="ydc-column">
+					<div class="ydc-column-user">
+						<div class="ydc-user-photo">
+							<a href="javascript:;"> <img
+								src="admin/images/icon/photo.png" title="" about="" alt="">
+							</a>
+						</div>
+						<div class="ydc-user-info">
+							<div class="ydc-user-info-name">
+								<a href="javascript:;">一点车</a>
+							</div>
+							<div class="ydc-user-info-func ydc-flex">
+								<span class="ydc-tag">在线</span>
+								<a href="login.html">注销</a>
+								<span class="ydc-tag">新手期</span> <span class="ydc-mal"> <i
+									class="ydc-icon ydc-icon-mail fl"></i> <em>12</em>
+								</span> <a href="javascript:;">退出</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+<!-- head YDC end -->
+
+<!-- content YDC begin -->
+	<section>
+		<div class="ydc-content-slide ydc-body">
+			<div class="ydc-flex">
+				<!-- left begin -->
+				<div class="ydc-column ydc-column-2">
+					<div class="ydc-menu">
+						<ul>
+						  <li class="ydc-menu-item"> <a href="doc-index.html" class="active"><em class="ydc-icon ydc-icon-home fl"></em>首页</a> </li>
+						  <li class="ydc-menu-item"><span class="ydc-menu-sub-title"><em class="imessage"></em>个人信息管理</span>
+							  <ul>
+									<li style="background: #00aef0">
+										<a href="doc-docinfo.html"><font color="#fff">管理个人信息</font></a>
+									</li>
+								</ul>
+							</li>
+							<li class="ydc-menu-item">
+								<span class="ydc-menu-sub-title">
+									<em class="register"></em>挂号列表管理
+								</span>
+							<li class="ydc-menu-item"><a href="index.html" class="">
+									<i class="ydc-icon ydc-icon-home fl"></i> 首页
+							</a></li>
+							<li class="ydc-menu-item"><a href="release.html"
+								class="active"> <i class="ydc-icon ydc-icon-find fl"></i> 发布
+							</a></li>
+							<li class="ydc-menu-item"><span class="ydc-menu-sub-title">
+									<i class="ydc-icon ydc-icon-file fl"></i> 管理
+							</span>
+								<ul>
+									<li><a href="content.html">内容管理</a></li>
+									<li><a href="related.html">内容同步</a></li>
+									<li><a href="asset.html">素材中心</a></li>
+								</ul></li>
+							<li class="ydc-menu-item"><span class="ydc-menu-sub-title">
+									<i class="ydc-icon ydc-icon-record fl"></i> 数据
+							</span>
+								<ul>
+									<li>
+										<a href="doc-register.html">查看挂号列表</a>
+									</li>
+								</ul>
+							</li>
+							<li class="ydc-menu-item">
+								<span class="ydc-menu-sub-title">
+									<em class="me"></em>病历管理
+								</span>
+									<li><a href="subscribe.html">订阅数据</a></li>
+									<li><a href="content-data.html">内容数据</a></li>
+									<li><a href="index-starLevel.html">指数星级</a></li>
+								</ul></li>
+							<li class="ydc-menu-item"><span class="ydc-menu-sub-title">
+									<i class="ydc-icon ydc-icon-set fl"></i> 设置
+							</span>
+								<ul>
+									<li>
+										<a href="doc-docme.html">查看接诊病历</a>
+									</li>
+									<li>
+										<a href="doc-patme.html">查看患者病历</a>
+									</li>
+								</ul>
+							</li>
+									<li><a href="info.html">账号信息</a></li>
+									<li><a href="account.html">账号状态</a></li>
+								</ul></li>
+							<li class="ydc-menu-item"><span class="ydc-menu-sub-title">
+									<i class="ydc-icon ydc-icon-customer fl"></i> 客服
+							</span>
+								<ul>
+									<li><a href="#">在线咨询</a></li>
+								</ul></li>
+						</ul>
+					</div>
+				</div>
+				<div class="ydc-column ydc-column-8">
+					<div class="ydc-release-content">
+						<div class="ydc-tabPanel ydc-tabPanel-release">
+							<div class="ydc-release-tab-head">
+								<ul>
+									<li class="hit">填写病历</li>
+								</ul>
+							</div>
+							<div class="ydc-panes">
+							<%
+								//获取要处理的挂号信息
+								int regid=Integer.parseInt(request.getParameter("regid"));
+								Register r=new Register();
+								RegisterDAO regdao=new RegisterDAO();
+								r=regdao.findById(regid);
+							
+								//获取要接就诊的患者信息
+                             	int patid=Integer.parseInt(request.getParameter("patid"));
+								Patient p=new Patient();
+								PatientDAO patdao=new PatientDAO();
+								p=patdao.findById(patid);
+								
+								//获取要接诊的医生信息
+								int docid=Integer.parseInt(request.getParameter("docid"));
+								Doctor d=new Doctor();
+								DoctorDAO docdao=new DoctorDAO();
+								d=docdao.findById(docid);
+                            %>
+                            <form action="../dodocmedicalrecord" method="post">
+								<div class="ydc-pane" style="display:block;">
+								<div class="ydc-pane" style="display: block;">
+									<div class="bl_bigborder">
+										<div class="bl_boxborder">
+											<span class="bl_title">门诊病历</span>
+											<p class="bl_date">
+												就诊日期:
+												<%	
+													//获取当前时间并转化为sql
+													Date date=new Date();
+													java.sql.Date sqldate=new java.sql.Date(date.getTime());
+													Date nowdate=sqldate;
+													//格式化并输出当前时间
+													SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+													String nowtime=dateFormat.format(date);
+												%>
+												<input name="time" type="text" style="border:none;" value="<%=nowtime %>">
+												<!--
+                                                 	作者：hao3073liu@163.com
+                                                 	时间：2018-12-04
+                                                 -->
+                                       			</span>
+												<span id="bl_todaydate"> </span>
+											</p>
+											<hr class="bl_fengehr" />
+											<div>
+												<!--
+                                                   	作者：hao3073liu@163.com
+                                                   	时间：2018-12-04
+                                                   	描述：通过页面加载事件和ajax直接获取数据库中的数据 
+                                                   		通过医生点击的学生姓名 直接展示在病历上 
+                                                   		减少医生的工作量
+                                                   -->
+												<span class="bl_patient_name">
+                                        			患者姓名:
+                                        			<span>
+                                        				<input name="patname" style="border:none;width:90px;" value="<%=p.getPatname() %>">
+                                        			</span>
+												</span>
+												<span class="bl_patient_name">
+                                        			患者性别:
+                                                            <!--
+												<span class="bl_patient_name"> 患者姓名: <span>
+														刘文浩 </span>
+												</span> <span class="bl_patient_name"> 患者性别: <!--
+                                                            	作者：hao3073liu@163.com
+                                                            	时间：2018-12-04
+                                                            	描述：直接从数据库获取 所以不再使用单选框
+                                                            -->
+                                        			<span>
+                                        				<%
+                                        					String sex;
+                                        					int temp=p.getPatsex();
+                                        					if(temp==1){
+                                        						sex="男";
+                                        					}else{
+                                        						sex="女";
+                                        					}
+                                        				%>
+                                        				<input name="patsex" style="border:none;width:50px;" value="<%=sex %>">
+                                        			</span>
+												</span>
+												<span class="bl_patient_name">
+                                        			患者年龄:
+                                        			<span>
+                                        				<input name="patage" style="border:none;width:50px;" value="<%=r.getRepatage() %>">
+                                        			</span>
+												</span>
+												<br/>
+                                                            --> <span>
+														男 </span>
+												</span> <span class="bl_patient_name"> 患者年龄: <span>
+														21 </span>
+												</span> <br />
+												<hr class="bl_fengehr" />
+												<span class="bl_patient_name">
+                                        			家庭住址:
+                                        			<span>
+                                        				<input name="pataddress" style="border:none;width:250px;" value="<%=p.getPataddress() %>">
+                                        			</span>
+												<span class="bl_patient_name"> 家庭住址: <span>
+														山东济南扛把子屯 </span>
+												</span> <span class="bl_patient_name"> 联系方式: <span>
+														15015975218 </span>
+												</span>
+												<input name="patid" style="border:none;width:0px;" value="<%=patid %>">
+												<span class="bl_patient_name">
+                                        			联系方式:
+                                        			<span>
+                                        				<input name="patphone" style="border:none;width:100px;" value="<%=p.getPatphonenumber() %>">
+                                        			</span>
+												</span>
+											</div>
+
+											<hr class="bl_fengehr" />
+											<div>
+												<span class="bl_patient_xinxi">
+													患者症状:
+													<textarea class="bl_patient_zhenzhuang" name="patsymptomg" style="border:none;"></textarea>
+												<span class="bl_patient_xinxi"> 患者症状: <textarea
+														class="bl_patient_zhenzhuang" name="zhengzhuang"></textarea>
+												</span>
+												<hr class="bl_fengehr" />
+												<span class="bl_patient_xinxi">
+													医生诊断:
+													<textarea class="bl_patient_zhenzhuang" name="docdiagnosis"style="border:none;"></textarea>
+												<span class="bl_patient_xinxi"> 医生诊断: <textarea
+														class="bl_patient_zhenzhuang" name="zhenduan"></textarea>
+												</span>
+												<hr class="bl_fengehr" />
+												<span class="bl_doctor"> <!--
+                                                       	作者：hao3073liu@163.com
+                                                       	时间：2018-12-04
+                                                       	描述：医生信息自动获取该账号下的医生，不再由医生自己填写
+                                                       -->
+													接诊医生:
+													<span class="bl_doctor_name">
+													<input name="docname" style="border:none;width:100px;" value="<%=d.getDocname()%>">
+													</span>
+                                                       --> 接诊医生: <span
+													class="bl_doctor_name">刘文浩</span>
+												</span>
+											</div>
+										</div>
+										<hr class="bl_fengehr" />
+										<div class="bl_boxborder">
+											<div>
+												<span class="bl_doctor">
+													药品清单:
+													<input placeholder="添加药品" name="druglist" id="bl_addyao" onfocus="fasong()" class="bl_addyao" />
+													<a class="bl_findyao" id="bl_fasong" onclick="add()">添加</a>
+													<span id="bl_addtishi"></span>
+												<span class="bl_doctor"> 药品清单: <input
+													placeholder="添加药品" name="addyao" id="bl_addyao"
+													onfocus="fasong()" class="bl_addyao" /> <a
+													class="bl_findyao" id="bl_fasong" onclick="add()">添加</a> <span
+													id="bl_addtishi"></span>
+												</span>
+											</div>
+										
+										</div>
+									</div>
+										<div class="bl_caseborder">
+											<input name="regid" value="<%=regid%>" style="border:none;width:0px;">
+											<a href="javascript:void(0)" onclick="javascript:document.forms[0].submit()" class="bl_save">
+												提交
+											</a>
+										</div>
+									<div class="bl_caseborder">
+										<a href="#" class="bl_save"> 添加 </a>
+									</div>
+								</div>
+							</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+	<script type="text/javascript">
+	
+			
+	
+	</script>
+</body>
+</html>

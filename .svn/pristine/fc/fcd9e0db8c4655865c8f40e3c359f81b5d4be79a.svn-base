@@ -1,0 +1,221 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name='TTUNION_verify' content='b846c3c2b85efabc496d2a2b8399cd62'>
+<meta name="sogou_site_verification" content="gI1bINaJcL" />
+<meta name="360-site-verification"
+	content="37ae9186443cc6e270d8a52943cd3c5a" />
+<meta name="baidu_union_verify"
+	content="99203948fbfbb64534dbe0f030cbe817">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="X-UA-Compatible"
+	content="IE=9; IE=8; IE=7; IE=EDGE;chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="keywords"
+	content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。">
+<meta name="description"
+	content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。。">
+<meta name="author" content="AUI, a-ui.com">
+<meta name="baidu-site-verification" content="ZVPGgtpUfW" />
+<title>医院</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link href="iTunesArtwork@2x.png" sizes="114x114"
+	rel="apple-touch-icon-precomposed">
+<link type="text/css" rel="stylesheet" href="admin/css/core.css">
+<link type="text/css" rel="stylesheet" href="admin/css/icon.css">
+<link type="text/css" rel="stylesheet" href="admin/css/home.css">
+
+
+</head>
+<body>
+
+	<!-- head YDC begin -->
+	<header class="ydc-header">
+		<div class="ydc-entered">
+			<div class="ydc-header-content ydc-flex">
+				<div class="ydc-column">
+					<a href="doc-index.html" class="ydc-column-ydc-logo"> <img
+						src="admin/images/icon/ydc-logo.png" title="" about="" alt="">
+					</a>
+				</div>
+				<div class="ydc-column">
+					<div class="ydc-column-user">
+						<div class="ydc-user-photo">
+							<a href="javascript:;"> <img
+								src="admin/images/icon/photo.png" title="" about="" alt="">
+							</a>
+						</div>
+						<div class="ydc-user-info">
+							<div class="ydc-user-info-name">
+								<a href="javascript:;">一点车</a>
+							</div>
+							<div class="ydc-user-info-func ydc-flex">
+								<span class="ydc-tag">在线</span> <a href="doc-login.html">注销</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- head YDC end -->
+
+	<!-- content YDC begin -->
+	<section>
+		<div class="ydc-content-slide ydc-body">
+			<div class="ydc-flex">
+				<!-- left begin -->
+				<div class="ydc-column ydc-column-2">
+					<div class="ydc-menu">
+						<ul>
+							<li class="ydc-menu-item"><a href="index.html"
+								class="active"><i class="ydc-icon ydc-icon-home fl"></i>首页</a></li>
+
+							<li class="ydc-menu-item"><span class="ydc-menu-sub-title"><em
+									class="imessage"></em>个人信息管理</span>
+								<ul>
+									<li class="onclick"><a href="doc-docinfo.html">管理个人信息</a>
+									</li>
+								</ul></li>
+							<li class="ydc-menu-item"><span class="ydc-menu-sub-title">
+									<em class="register"></em>挂号列表管理
+							</span>
+								<ul>
+									<li><a href="doc-register.html">查看挂号列表</a></li>
+								</ul></li>
+							<li class="ydc-menu-item"><span class="ydc-menu-sub-title">
+									<em class="me"></em>病历管理
+							</span>
+								<ul>
+									<li><a href="doc-docme.html">查看接诊病历</a></li>
+									<li><a href="doc-patme.html">查看患者病历</a></li>
+								</ul></li>
+						</ul>
+					</div>
+				</div>
+				<!-- left end -->
+				<!-- right begin -->
+				<div class="ydc-column ydc-column-8">
+					<div class="ydc-release-content">
+						<div class="ydc-tabPanel ydc-tabPanel-release">
+							<div class="ydc-release-tab-head">
+								<ul>
+									<li class="hit">帐号信息</li>
+								</ul>
+							</div>
+							<div class="ydc-panes">
+								<div class="ydc-pane ydc-pane-clear" style="display: block;">
+									<div class="ydc-reg-form-group clearfix">
+										<label>用户编号</label>
+										<div class="ydc-reg-form-input">
+											<label>1</label>
+										</div>
+									</div>
+									<div class="ydc-reg-form-group clearfix">
+										<label>用户头像</label>
+										<div class="ydc-reg-form-input">
+											<label></label>
+											<div class="ydc-reg-form-text ydc-reg-form-user-logo">
+												<img src="admin/images/icon/user-logo.png" alt="">
+											</div>
+										</div>
+									</div>
+									<div class="ydc-reg-form-group clearfix">
+										<label>用户姓名</label>
+										<div class="ydc-reg-form-input">
+											<label>黄成兴</label>
+										</div>
+									</div>
+									<div class="ydc-reg-form-group clearfix">
+										<label>用户性别</label>
+										<div class="ydc-reg-form-input">
+											<label>男</label>
+										</div>
+									</div>
+									<div class="ydc-reg-form-group clearfix">
+										<label>用户年龄</label>
+										<div class="ydc-reg-form-input">
+											<label>19</label>
+										</div>
+									</div>
+									<div class="ydc-reg-form-group clearfix">
+										<label>身份证号</label>
+										<div class="ydc-reg-form-input">
+											<label>411424**********31</label>
+										</div>
+									</div>
+									<div class="ydc-reg-form-group clearfix">
+										<label>手机号</label>
+										<div class="ydc-reg-form-input">
+											<label>17862983534</label>
+										</div>
+									</div>
+									<div class="ydc-reg-form-group clearfix">
+										<label>邮箱</label>
+										<div class="ydc-reg-form-input">
+											<label>84196397@qq.com</label>
+										</div>
+									</div>
+									<div class="ydc-reg-form-group clearfix">
+										<label>住址</label>
+										<div class="ydc-reg-form-input">
+											<label>齐鲁工业大学</label>
+										</div>
+									</div>
+									<div class="ydc-reg-form-group clearfix"
+										style="margin-top: 40px;">
+										<div class="ydc-reg-form-button" style="margin-left: 255px;">
+											<a class="btn fl" href="doc-patme.html">病历信息</a>
+										</div>
+									</div>
+									<div class="ydc-reg-form-group clearfix"
+										style="margin-top: 40px;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- right end -->
+			</div>
+		</div>
+
+	</section>
+	<!-- content YDC end -->
+
+	<script type="text/javascript" src="admin/js/jquery.min.js"></script>
+	<script type="text/javascript">
+	    var slideIndex = 0;
+	    showSlides();
+
+	    function showSlides() {
+	        var i;
+	        var slides = document.getElementsByClassName("mySlides");
+	        for (i = 0; i < slides.length; i++) {
+	            slides[i].style.display = "none";
+	        }
+	        slideIndex++;
+	        if (slideIndex> slides.length) {slideIndex = 1}
+	        slides[slideIndex-1].style.display = "block";
+	        setTimeout(showSlides, 3000); // 滚动时间
+	    }
+	</script>
+
+	<script type="text/javascript">
+	    $(function(){
+	        $('.ydc-tabPanel ul li').click(function(){
+	            $(this).addClass('hit').siblings().removeClass('hit');
+	            $('.ydc-panes>div:eq('+$(this).index()+')').show().siblings().hide();
+	        })
+	    })
+	</script>
+
+</body>
+</html>

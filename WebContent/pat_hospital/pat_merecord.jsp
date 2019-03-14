@@ -1,0 +1,173 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<link type="text/css" rel="stylesheet" href="pat_hospital/css/liu.css">
+<link type="text/css" rel="stylesheet" href="pat_hospital/css/icon.css">
+<link type="text/css" rel="stylesheet" href="pat_hospital/css/core.css">
+<link type="text/css" rel="stylesheet" href="pat_hospital/css/home.css">
+	<script type="text/javascript" src="pat_hospital/js/jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="pat_hospital/js/liu.js"></script>
+<script type="text/javascript">
+	//打印病历的action
+	function printrecord(){
+		$.post("printmedirecord",{},function(data){
+			
+		},"json");
+	};
+</script>
+<style>
+	.bl_bigborder{
+		margin:0px 40px 230px 40px;
+		border-radius:2px;
+		font-family:楷体;
+		font-weight:bold;
+	}
+	button:focus{
+    	border-style:solid;
+   		border-color: #00AEF0;
+	    box-shadow: 0 0 15px #03a9f4;
+	   
+}
+</style>
+<script type="text/javascript">
+			function colorChange(eva){
+				eva.style.bo
+			}
+		</script>
+</head>
+<body style="overflow-x:hidden;overflow-y:auto;">
+	<div class="ydc-column ydc-column-8">
+		<div class="ydc-release-content">
+			<div class="ydc-tabPanel ydc-tabPanel-release">
+				<div class="ydc-release-tab-head">
+					<ul style="color:#00AEF0">
+						个人病历
+					</ul>
+				</div>
+				<div class="ydc-panes">
+					<div class="ydc-pane" style="display: block;">
+						<div class="bl_bigborder">
+							<div class="bl_boxborder" style="border-radius:4px;">
+								<span class="bl_title"style="color:black;font-weight:bold;font-size:35px">门诊病历</span>
+								<p class="bl_date">
+									就诊日期:
+												<!--
+                                                 	作者：hao3073liu@163.com
+                                                 	时间：2018-12-04
+                                                 	描述：这里获取系统的时间 通过js
+                                                 -->
+                                                 <c:out value="${mrecord.medate }"></c:out>
+												<span id="bl_todaydate">
+                                       			</span>
+											</p>
+											<hr class="bl_fengehr" />
+											<div>
+												<!--
+                                                   	作者：hao3073liu@163.com
+                                                   	时间：2018-12-04
+                                                   	描述：通过页面加载事件和ajax直接获取数据库中的数据 
+                                                   		通过医生点击的学生姓名 直接展示在病历上 
+                                                   		减少医生的工作量
+                                                   -->
+												<span class="bl_patient_name">
+                                        			患者姓名:
+                                        			<span>                   
+                                        				<c:out value="${user_pat.patname }"></c:out>
+                                        			</span>
+												</span>
+												<span class="bl_patient_name">
+                                        			患者性别:
+                                                            <!--
+                                                            	作者：hao3073liu@163.com
+                                                            	时间：2018-12-04
+                                                            	描述：直接从数据库获取 所以不再使用单选框
+                                                            -->
+                                        			<span>                                      				
+                                        				<c:if test="${user_pat.patsex==0 }">
+                                        					女
+                                        				</c:if>
+                                        				<c:if test="${user_pat.patsex==1}">
+                                        					男
+                                        				</c:if>
+                                        			</span>
+												</span>
+												<span class="bl_patient_name">
+                                        			患者年龄:
+                                        			<span>                                       				
+                                        				<c:out value="${mrecord.mepatage }"></c:out>
+                                        			</span>
+												</span>
+												<br/>
+												<hr class="bl_fengehr" />
+												<span class="bl_patient_name">
+                                        			家庭住址:
+                                        			
+                                        			<span>                                      				
+                                        				<c:out value="${user_pat.pataddress}"></c:out>
+                                        			</span>
+												</span>
+												<span class="bl_patient_name">
+                                        			联系方式:
+                                        			<span>                                       				
+                                        				<c:out value="${user_pat.patphonenumber}"></c:out>
+                                        			</span>
+												</span>
+											</div>
+								<hr class="bl_fengehr" />
+								<div style="border-radius:2px;">
+									<span class="bl_patient_xinxi"> 患者症状: <textarea readonly="true" style="border-radius:2px;border:0;"
+											readonly="readonly" class="bl_patient_zhenzhuang"
+											name="zhengzhuang"><c:out value="${mrecord.patsymptom }"></c:out></textarea>
+									</span>
+									<hr class="bl_fengehr" />
+									<span class="bl_patient_xinxi"> 医生诊断: <textarea readonly="true" style="border-radius:2px;border:0;"
+											class="bl_patient_zhenzhuang" name="zhenduan"><c:out value="${mrecord.docdiagnosis }"></c:out></textarea>
+									</span>
+									<hr class="bl_fengehr" />
+									<span class="bl_doctor"> 		
+                                                       <!--
+                                                       	作者：hao3073liu@163.com
+                                                       	时间：2018-12-04
+                                                       	描述：医生信息自动获取该账号下的医生，不再由医生自己填写
+                                                       -->
+													接诊医生:
+													<span class="bl_doctor_name"><c:out value="${mrecord.medocname }"></c:out></span>
+												</span>
+											</div>
+										</div>
+							<hr class="bl_fengehr" />
+							<div class="bl_boxborder" style="border-radius:2px;">
+								<div>
+									<span class="bl_doctor"> 药品清单:
+									 <ol style="margin-left: 100px;margin-top: 50px">
+									 <c:if test="${drug_list==null }">
+									</c:if>
+											<c:if test="${drug_list!=null }">
+												<c:forEach items="${drug_list}" var="drug">
+												<li style="margin-top: 5px">
+												  <c:out value="${drug }"></c:out>
+												 </li><br/>
+												</c:forEach>
+											</c:if>
+									</ol>
+									</span>
+								</div>
+							</div>		
+						</div>
+						<div style="margin-top:-150px;margin-left:410px">
+							<button style="background-color:#00AEF0;border-radius:5px;width:110px;height:40px;border:none;cursor:pointer;color:white" onmousemove="colorChange(this)" onclick="printrecord()">打印病历</button>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>	
+</body>
+</html>

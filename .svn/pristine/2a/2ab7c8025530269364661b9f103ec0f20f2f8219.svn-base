@@ -1,0 +1,90 @@
+//package com.hospital.admaction;
+//
+//import java.io.IOException;
+//import java.io.OutputStream;
+//import java.util.List;
+//
+//import javax.servlet.ServletException;
+//import javax.servlet.http.HttpServlet;
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
+//
+//import org.apache.poi.hssf.usermodel.HSSFCell;
+//import org.apache.poi.hssf.usermodel.HSSFRow;
+//import org.apache.poi.hssf.usermodel.HSSFSheet;
+//import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+//
+//import com.hospital.dao.OrdersDAO;
+//import com.hospital.vo.Orders;
+//
+///**
+// * Servlet implementation class DownloadExcel
+// */
+//public class DownloadExcel extends HttpServlet {
+//	private static final long serialVersionUID = 1L;
+//       
+//    /**
+//     * @see HttpServlet#HttpServlet()
+//     */
+//    public DownloadExcel() {
+//        super();
+//        // TODO Auto-generated constructor stub
+//    }
+//
+//	/**
+//	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+//	 */
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		this.doPost(request, response);
+//	}
+//
+//	/**
+//	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+//	 */
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		response.setCharacterEncoding("utf-8");
+//		OrdersDAO od = new OrdersDAO();
+//		int count = -1;
+//		List<Orders> list = null;
+//		try {
+//			count = od.getTotal();
+//			list = od.findAll();
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		HSSFWorkbook wb = new HSSFWorkbook();//创建excel工作�?   excel2003以及之前版本请使用HSSFWorkbook
+//		HSSFSheet s = wb.createSheet();// 创建sheet  若有多页sheet页面可创建多�?
+//		HSSFRow	r = s.createRow(0);//创建�? 0代表第一�?
+//		HSSFCell c0=r.createCell(0);
+//		c0.setCellValue("订单编号");//创建单元格并赋�?? 0代表当前行的第一个单元格}}}
+//		HSSFCell c1=r.createCell(1);
+//		c1.setCellValue("订单日期");
+//		HSSFCell c2=r.createCell(2);
+//		c2.setCellValue("总价");
+//		HSSFCell c3=r.createCell(3);
+//		c3.setCellValue("订单状态");
+//		HSSFCell c4=r.createCell(4);
+//		c4.setCellValue("订单详情");
+//		for(int i = 1; i <= count; i++) {
+//			HSSFRow	r1 = s.createRow(i);
+//			HSSFCell c5=r1.createCell(0);
+//			c5.setCellValue(list.get(i-1).getOrid());
+//			HSSFCell c6=r1.createCell(1);
+//			c6.setCellValue(list.get(i-1).getOrdate().toString());
+//			HSSFCell c7=r1.createCell(2);
+//			c7.setCellValue(list.get(i-1).getOrprice());
+//			HSSFCell c8=r1.createCell(3);
+//			c8.setCellValue(list.get(i-1).getOrstate());
+//			HSSFCell c9=r1.createCell(4);
+//			c9.setCellValue(list.get(i-1).getOrinformation());
+//			
+//		}
+//		response.setHeader("Content-Disposition", "attachment;filename=Order.xls");
+//		response.setContentType("application/x-download");
+//		OutputStream out=response.getOutputStream();
+//		wb.write(out);
+//	}
+//
+//}

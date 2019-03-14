@@ -1,0 +1,152 @@
+package com.hospital.dao;
+
+import java.util.List;
+
+import com.hospital.db.DBManager;
+import com.hospital.mapper.IMapper;
+import com.hospital.mapper.PatientMapper;
+import com.hospital.vo.Patient;
+
+//患者表的DAO
+public class PatientDAO {
+	//新增用户
+	public int save(Patient p) throws Exception{
+		String sql = "insert into Patient values(patid.nextval,?,?,?,?,?,?,?,?,?,?)";
+		Object []params = {
+				p.getPatname(),
+				p.getPatsex(),
+				p.getPatidcard(),
+				p.getPatbirthday(),
+				p.getPatphonenumber(),
+				p.getPatmail(),
+				p.getPataddress(),
+				p.getPatmi(),
+				p.getPatphoto(),
+				p.getPatpass()		
+		};
+		DBManager db = new DBManager();
+		int retn = db.executeUpdate(sql, params);
+		return retn;
+	}
+	//删除用户  通过用户的ID
+	public int delete(Patient p) throws Exception{
+		String sql = "delete from Patient where patid = ?";
+		Object []params={
+				p.getPatid()
+		};
+		DBManager db=new DBManager();
+		int retn=db.executeUpdate(sql, params);
+		return retn;
+	}
+	//查询总条数
+		public int getTotal() throws Exception{
+			String sql=" select count(*) from Patient ";
+			Object []params=null;
+			DBManager db=new DBManager();
+			int total=db.executeQueryJvHe(sql, params);
+			return total;
+		}
+	//查询用户表 分页查询 查询出全部信息 
+	public List<Patient> findByPage(int pagenow, int pagesize) throws Exception{
+		int start=(pagenow-1)*pagesize;
+		String sql = " select *from (select rownum rn,p.* from Patient p) where rn>? and rownum<=? ";
+		Object []params = {
+			start,
+			pagesize
+		};
+		IMapper mapper = new PatientMapper();
+		DBManager db = new DBManager();
+		List<Patient> list = db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+	//修改用户信息 通过用户ID,获取用户信息 并修改
+	public int merge(Patient p) throws Exception{
+		String sql=" update Patient set patname=?,patpass=?,patphoto=?,patsex=?,patidcard=?,patbirthday=?,patphonenumber=?,patmail=?,pataddress=?,patmi=? where patid=? ";
+		Object []params={
+				p.getPatname(),
+				p.getPatpass(),
+				p.getPatphoto(),
+				p.getPatsex(),
+				p.getPatidcard(),
+				p.getPatbirthday(),
+				p.getPatphonenumber(),
+				p.getPatmail(),
+				p.getPataddress(),
+				p.getPatmi(),
+				p.getPatid()
+		};
+		DBManager db=new DBManager();
+		int retn=db.executeUpdate(sql, params);
+		return retn;
+	}
+	//通过用户ID 直接查询该用户的所有信息
+	public Patient findById(int patid) throws Exception{
+		String sql="select *from Patient where patid=?";
+		Object []params={
+				patid
+		};
+		IMapper mapper=new PatientMapper();
+		DBManager db=new DBManager();
+		List<Patient> list=db.executeQueryObjectList(sql, params, mapper);
+		Patient d=list.get(0);
+		return d;
+	}
+	//通过手机号查询该用户所有的信息
+	public Patient findByPatphonenumber(String Patphonenumber) throws Exception{
+		String sql="select *from Patient where Patphonenumber=?";
+		Object []params={
+				Patphonenumber
+		};
+		IMapper mapper=new PatientMapper();
+		DBManager db=new DBManager();
+		List<Patient> list=db.executeQueryObjectList(sql, params, mapper);
+		Patient d=list.get(0);
+		return d;
+	}
+
+	
+	
+
+	
+
+	//通过用户身份证号查询用户信息 返回值为list集合
+	public List<Patient> findByPatcard(String patidcard) throws Exception{
+		String sql="select *from Patient where patidcard=?";
+		Object []params={
+				patidcard
+		};
+		IMapper mapper=new PatientMapper();
+		DBManager db=new DBManager();
+		List<Patient> list=db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+	//通过电话号码判断该用户是否存在
+	public int checkUser(String phonenumber) throws Exception{
+		String sql="select * from patient where patphonenumber=?";
+		Object []params={phonenumber};
+		DBManager db=new DBManager();
+		int retn=db.executeUpdate(sql, params);
+		return retn;
+	}
+	
+	//根据电话号码找到用户，实现找回密码的功能
+	public int changePass(String newpass,String phonenumber) throws Exception{
+		String sql="update patient set patpass=? where patphonenumber=?";
+		Object []params={newpass,phonenumber};
+		DBManager db=new DBManager();
+		int retn=db.executeUpdate(sql, params);
+		return retn;
+	}
+
+	//通过手机号查询该用户所有的信息 返回值为list集合
+		public List<Patient> findByPatphone(String Patphonenumber) throws Exception{
+			String sql="select *from Patient where Patphonenumber=?";
+			Object []params={
+					Patphonenumber
+			};
+			IMapper mapper=new PatientMapper();
+			DBManager db=new DBManager();
+			List<Patient> list=db.executeQueryObjectList(sql, params, mapper);
+			return list;
+		}
+}

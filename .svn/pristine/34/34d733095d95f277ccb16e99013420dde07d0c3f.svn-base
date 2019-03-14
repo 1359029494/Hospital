@@ -1,0 +1,86 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<head>
+
+<meta charset="UTF-8">
+
+<title>CSS3个人资料填写表单 - 站长素材</title>
+
+
+<% 
+	String path = request.getContextPath(); String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%> 
+<base href="<%=basePath%>"> 
+<link href="pat_hospital/css/styleforupdate.css" rel="stylesheet" type="text/css"> 
+<script type="text/javascript" src="pat_hospital/js/jquery.min.js">
+</script>
+<script type="text/javascript" src="pat_hospital/js/indexforupdate.js"></script>
+
+<style>
+.change{
+		  display: block;
+		  width: 100%;
+		  height: 50px;
+		  padding: 0;
+		  background: #31dddb;
+		  line-height: 50px;
+		  text-align: center;
+		  text-decoration: none;
+		  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+		  font-size: 1.2em;
+		  font-family: "Helvetica Neue", sans-serif;
+		  font-weight: 400;
+		  color: #fff;
+		  border: 1px solid #27c1bf;
+		  border-radius: 4px;
+		  box-shadow: 0 0 0 transparent;
+  }
+  .change{
+  	cursor: pointer;
+  }
+</style>
+<script type="text/javascript">
+	function change_msg(){
+		var make = document.getElementById("makeone");
+		var name = document.getElementById("name").value;
+		var address = document.getElementById("address").value;
+		var mail = document.getElementById("mail").value;
+		make.href="changepatientmessage?pat_name="+name+"&pat_address="+address+"&pat_mail="+mail;
+		
+	};
+</script>
+</head>
+
+<body>
+<section class='container'>
+<!-- / Form -->
+<form>
+<!-- / Header -->
+
+<!-- / Fieldset Alpha -->
+	<fieldset class='alpha'>
+		<legend>修改个人信息</legend>
+		<div class='frow'>
+			<input class='item' id="name" placeholder='姓名' type='text' value="${pre_pat.patname }">
+		</div>
+		<div class='frow'>
+			<input class='item' id="address" placeholder='住址' type='text' value="${pre_pat.pataddress }">
+		</div>
+		<div class='frow'>
+			<input class='item' id="mail" placeholder='个人邮箱' type='text' value="${pre_pat.patmail }">
+		</div>
+		<div class='frow'>  
+			<a class='change' id="makeone" style="margin-top:15px;disable:true" onclick="change_msg()">修改</a>
+		</div>
+		<div class='frow' style="float:left;width:150px;margin-top:30px">
+			<a class='change' href='pat_hospital/myselfchangepass.jsp'>修改密码</a>
+		</div>
+		<div class='frow' style="float:right;width:150px;margin-top:30px">
+			<a class='change' href='pat_hospital/myselfchangephone.jsp'>修改手机号</a>
+		</div>
+	</fieldset>
+</form>
+</section>
+</body>
+
+</html>

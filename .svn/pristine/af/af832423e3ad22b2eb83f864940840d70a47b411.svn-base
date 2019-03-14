@@ -1,0 +1,82 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<!-- Site Title   -->
+<title>Home</title>
+<!-- Fav Icons   -->
+<link rel="icon" href="images/a0.jpg" type="image/x-icon">
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+<script src="js/iconfont.js" type="text/javascript" charset="utf-8"></script>
+<!-- Fonts Awesome -->
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<!-- Google Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,200,300,100,500,600,700,800,900' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400" rel="stylesheet">
+<!-- animate Effect -->
+<link href="css/animate.css" rel="stylesheet">
+<!-- Main CSS -->
+<link href="css/style.css" rel="stylesheet">
+<!-- Responsive CSS -->
+<link href="css/responsive.css" rel="stylesheet">
+<style type="text/css">
+	body{
+		overflow:hidden;
+		
+	}
+</style>
+</head>
+<body>
+
+
+<section id="section1" class="section-margine">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+      
+        <div class="section-1-box wow bounceIn">
+        	<a href="guahao.jsp" target="_parent">
+          		<div class="section-1-box-icon-background"><i class="iconfont icon-jinriguahao"></i></div>
+          		<h4 class="text-center">挂号</h4>
+           </a>
+         <!-- <p class="text-center">You can use this button to register</p>-->
+        </div>
+       
+      </div>
+      <div class="col-md-3  col-sm-6">
+      	
+        <div class="section-1-box wow bounceIn" data-wow-delay=".1s">
+          <a href="../domedicine" target="_parent">
+	          <div class="section-1-box-icon-background"><i class="iconfont icon-yaoxiang"></i></div>
+	          <h4 class="text-center">自助拿药</h4>
+           </a>
+          <!--<p class="text-center">You can use this button for self-service medicine</p>-->
+        </div>
+       
+      </div>
+      
+    </div>
+  </div>
+</section>
+<script src="js/jquery.min.js"></script> 
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.plugin.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script> 
+<script src="js/jquery.magnific-popup.min.js"></script> 
+<script src="js/bootstrap-dropdownhover.min.js"></script>
+<script src="js/wow.min.js"></script> 
+<script src="js/waypoints.min.js"></script> 
+<script src="js/jquery.counterup.min.js"></script> 
+<script src="js/main.js"></script>
+</body>
+</html>

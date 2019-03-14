@@ -1,0 +1,83 @@
+package com.hospital.patience_action;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.hospital.dao.PatientDAO;
+import com.hospital.vo.Patient;
+
+/**
+ * Servlet implementation class pat_dologinAction
+ * author:¡ıÓ¯»€
+ * time:2018/12/10
+ */
+public class pat_dologinAction extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public pat_dologinAction() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String yanzheng =(String)session.getAttribute("yanzheng");
+		String yzm = request.getParameter("yzm");
+		if (yanzheng.equals(yzm)){
+			Patient pat = new Patient();
+			String userid = request.getParameter("logname");
+			String userpass = request.getParameter("logpass");
+			PatientDAO dao = new PatientDAO();
+		try {
+			pat = dao.findByPatphonenumber(userid);
+//			if(pat==null) {
+//				session.setAttribute("user_pat", 0);
+//				response.sendRedirect("pat_hospital/parlogin.jsp");
+//			}else if(pat.getPatpass()==userpass) {
+//				session.setAttribute("user_pat", pat);
+////				response.sendRedirect("/hospital/pat_hospital/myself.html");
+//				response.sendRedirect("pat_hospital/myself.html");
+//			}else {
+//				session.setAttribute("user_pat", 1);
+//				response.sendRedirect("/hospital/pat_hospital/parlogin.jsp");
+//			}
+			if(pat.getPatpass().equals(userpass)) {
+				session.setAttribute("user_pat", pat);
+				response.sendRedirect("pat_hospital/myself.jsp");
+			}else {
+				response.sendRedirect("pat_hospital/parlogin.jsp");
+			}
+			
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+//			response.sendRedirect("/pat_hospital/parlogin.html");
+		}
+		}else {
+			response.sendRedirect("pat_hospital/parlogin.jsp");
+		}
+		
+	}
+
+}

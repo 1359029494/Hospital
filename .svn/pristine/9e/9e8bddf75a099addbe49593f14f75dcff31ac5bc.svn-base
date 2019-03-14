@@ -1,0 +1,60 @@
+package com.hospital.dao;
+
+import java.util.List;
+
+import com.hospital.db.DBManager;
+import com.hospital.mapper.AdmmailMapper;
+import com.hospital.mapper.IMapper;
+import com.hospital.mapper.OrdersMapper;
+import com.hospital.vo.Admmail;
+import com.hospital.vo.Orders;
+
+public class AdmmailDAO {
+	//查询所有数据
+	public List<Admmail> findByPage(int pagenow, int pagesize) throws Exception{
+		int start=(pagenow-1)*pagesize;
+		String sql = " select *from (select rownum rn,o.* from admmail o) where rn>? and rownum<=? order by maildate";
+		Object []params = {
+			start,
+			pagesize
+		};
+		IMapper mapper = new AdmmailMapper();
+		DBManager db = new DBManager();
+		List<Admmail> list = db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+		
+	//查询总条数
+	public int getTotal() throws Exception{
+		String sql=" select count(*) from admmail ";
+		Object []params=null;
+		DBManager db=new DBManager();
+		int total=db.executeQueryJvHe(sql, params);
+		return total;
+	}
+		//新增加医生
+		public int save(Admmail a) throws Exception{
+			String sql=" insert into admmail values(mailid.nextval,?,?,?,?) ";
+			Object []params={
+					a.getDocid(),
+					a.getMailmessages(),
+					a.getMailstate(),
+					a.getMaildate()
+			};
+			DBManager db=new DBManager();
+			int retn=db.executeUpdate(sql, params);
+			return retn;
+		}	
+		
+		//修改消息信息 通过消息ID,获取消息信息 并修改
+		public int merge(int mailstate, int mailid) throws Exception{
+			String sql=" update admmail set mailstate=?  where mailid=? ";
+			Object []params={
+					mailstate,
+					mailid
+			};
+			DBManager db=new DBManager();
+			int retn=db.executeUpdate(sql, params);
+			return retn;
+		}
+}

@@ -1,0 +1,160 @@
+package com.hospital.dao;
+
+import java.util.List;
+
+import com.hospital.db.DBManager;
+import com.hospital.mapper.IMapper;
+import com.hospital.mapper.MedicalRecordMapper;
+import com.hospital.vo.MedicalRecord;
+
+//病历表的DAO
+public class MedicalRecordDAO {
+	//新建病历
+	public int save(MedicalRecord me) throws Exception{
+		String sql = "insert into MedicalRecord values(meid.nextval,?,?,?,?,?,?,?)";
+		Object []params = {
+				me.getPatid(),
+				me.getMepatage(),
+				me.getPatsymptom(),
+				me.getDocdiagnosis(),
+				me.getDruglist(),
+				me.getMedate(),
+				me.getMedocname()
+		};
+		DBManager db = new DBManager();
+		int retn = db.executeUpdate(sql, params);
+		return retn;
+	}
+	//删除病历  通过病历的ID
+	public int delete(MedicalRecord me) throws Exception{
+		String sql = "delete from MedicalRecord where meid = ?";
+		Object []params={
+				me.getMeid()
+		};
+		DBManager db=new DBManager();
+		int retn=db.executeUpdate(sql, params);
+		return retn;
+	}
+	//查询总条数
+	public int getTotal() throws Exception{
+		String sql=" select count(*) from MedicalRecord ";
+		Object []params=null;
+		DBManager db=new DBManager();
+		int total=db.executeQueryJvHe(sql, params);
+		return total;
+	}
+	//查询病历表 分页查询 查询出全部信息 
+	public List<MedicalRecord> findByPage(int pagenow, int pagesize) throws Exception{
+		int start=(pagenow-1)*pagesize;
+		String sql = " select *from (select rownum rn,me.* from MedicalRecord me) where rn>? and rownum<=? ";
+		Object []params = {
+			start,
+			pagesize
+		};
+		IMapper mapper = new MedicalRecordMapper();
+		DBManager db = new DBManager();
+		List<MedicalRecord> list = db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+	//修改病历信息 通过病历ID,获取病历信息 并修改
+	public int merge(MedicalRecord me) throws Exception{
+		String sql=" update MedicalRecord set patid=?,mepatage=?,patsymptom=?,docdiagnosis=?,druglist=?,medate=?,medocname=? where meid=? ";
+		Object []params={
+				me.getPatid(),
+				me.getMepatage(),
+				me.getPatsymptom(),
+				me.getDocdiagnosis(),
+				me.getDruglist(),
+				me.getMedate(),
+				me.getMedocname(),
+				me.getMeid()
+		};
+		DBManager db=new DBManager();
+		int retn=db.executeUpdate(sql, params);
+		return retn;
+	}
+	//通过病历ID 直接查询该病历的所有信息
+	public MedicalRecord findById(int meid) throws Exception{
+		String sql="select *from MedicalRecord where meid=?";
+		Object []params={
+				meid
+		};
+		IMapper mapper=new MedicalRecordMapper();
+		DBManager db=new DBManager();
+		List<MedicalRecord> list=db.executeQueryObjectList(sql, params, mapper);
+		MedicalRecord d=list.get(0);
+		return d;
+	}
+	
+	/*
+	 分页查询病人的以往病历记录，并按日期排序
+	 增加者：陈雪冰   2018/12/13
+	 */
+	public List<MedicalRecord> findByPageOrderByDate(int patid,int pagenow, int pagesize) throws Exception{
+		int start=(pagenow-1)*pagesize;
+		String sql = " select *from (select rownum rn,me.* from MedicalRecord me where patid=? ) where rn>? and rownum<=? order by medate desc";
+		Object []params = {
+			patid,
+			start,
+			pagesize
+		};
+		IMapper mapper = new MedicalRecordMapper();
+		DBManager db = new DBManager();
+		List<MedicalRecord> list = db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+	/*
+	 获取给定id的患者病历的总条数
+	 增加者： 陈雪冰  2018/12/13
+	 */
+	public int getTotalOrderToPat(int patid) throws Exception{
+		String sql=" select count(*) from MedicalRecord where patid=?";
+		Object []params= {patid};
+		DBManager db=new DBManager();
+		int total=db.executeQueryJvHe(sql, params);
+		return total;
+	}
+	/*
+	 分页查询医生的以往接诊的病历记录，并按日期排序
+	 增加者： 黄成兴  2018/12/16
+	 */
+	public List<MedicalRecord> DocfindByPageOrderByDate(String medocname,int pagenow, int pagesize) throws Exception{
+		int start=(pagenow-1)*pagesize;
+		String sql = " select *from (select rownum rn,me.* from MedicalRecord me where medocname=? ) where rn>? and rownum<=? order by medate desc";
+		Object []params = {
+			medocname,
+			start,
+			pagesize
+		};
+		IMapper mapper = new MedicalRecordMapper();
+		DBManager db = new DBManager();
+		List<MedicalRecord> list = db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+	/*
+	 获取给定医生接诊病历的总条数
+	 增加者： 黄成兴  2018/12/16
+	 */
+	public int DocgetTotalOrderTodoc(String medocname) throws Exception{
+		String sql=" select count(*) from MedicalRecord where medocname=?";
+		Object []params= {medocname};
+		DBManager db=new DBManager();
+		int total=db.executeQueryJvHe(sql, params);
+		return total;
+	}
+	
+	/*
+	 查询病人全部的以往病历记录，并按日期排序
+	 增加者：岳晨   2018/12/30
+	 */
+	public List<MedicalRecord> findAllByPageOrderByDate(int patid) throws Exception{
+		String sql = " select *from MedicalRecord  where patid=? order by medate desc";
+		Object []params = {
+			patid,
+		};
+		IMapper mapper = new MedicalRecordMapper();
+		DBManager db = new DBManager();
+		List<MedicalRecord> list = db.executeQueryObjectList(sql, params, mapper);
+		return list;
+	}
+}
