@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">病历表</h1>
+		</header>
+		<div class="mui-content">
+			<div style="text-align: center; margin-top: 10px;">
+				<img src="images/logo.png"/>
+			</div>
+			<div class="med-info-body">
+				
+		    </div>
+		</div>
+	</body>
+	
+	<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var servlet = localStorage.getItem('servlet');
+			var pname = localStorage.getItem('pname');
+			mui.post(servlet+'AppMedicalRecord',{},function(data){
+				tplm = '';
+				for(m in data){
+					tplm += '<div class="med-info" style="margin-top: 10px;">'
+		    		tplm += '<div style="overflow: hidden;">'
+			    	tplm += '<div style="margin-left: 20px; padding-top: 10px; float: left;">姓名:<span class="decoration">'+pname+'</span></div>'
+			    	tplm += '<div style="margin-left: 40%; padding-top: 10px; float: left;">年龄：<span class="decoration">'+data[m].mepatage+'</span></div>'
+		    		
+			    	tplm += '</div>'
+			    	tplm += '<div style="margin-left: 20px; margin-top: 20px;">症状：<span class="decoration">'+data[m].patsymptom+'</span></div>'
+			    	tplm += '<div style="margin-left: 20px; margin-top: 20px;">医生诊断：<span class="decoration">'+data[m].docdiagnosis+'</span></div>'
+			    	tplm += '<div style="margin-left: 20px; margin-top: 30px;">药品清单：<span class="decoration">'+data[m].druglist+'</span></div>'
+			    	tplm += '<div style="margin-left: 20px; margin-top: 30px; float: left;">就诊时间:<span class="decoration">'+data[m].medate+'</span></div>'
+			    	tplm += '<div style="margin-left: 60%; margin-top: 30px; padding-bottom: 10px;">医生姓名：<span class="decoration">'+data[m].medocname+'</span></div>'
+			    	tplm += '</div>'
+			    	}
+					$(".med-info-body").html(tplm);
+				}
+				
+			,'json')
+		}
+	</script>
+</html>

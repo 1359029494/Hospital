@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">预约缴费</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="yuyue-title">
+		    	<div class="yuyue-img">
+		    		
+		    	</div>
+		    	<span class="yuyue-span"></span>
+		    </div>
+		    <button id="zhifubao" class="btn-index">确定预约</button>
+		</div>
+	</body>
+<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		
+		window.onload = function(){
+			var photo = localStorage.getItem('photo');
+			var dname = localStorage.getItem('dname');
+			var docname = localStorage.getItem('docname');
+			$('.yuyue-img').html('<img src="'+photo+'"/>');
+			$('.yuyue-span').html('您预约的医生为'+dname+docname+'。')
+			
+		}
+		
+			var wxChannel = null; // 微信支付  
+            var aliChannel = null; // 支付宝支付  
+            var channel = null;   //支付通道 
+            mui.init({  
+                swipeBack:true //启用右滑关闭功能  
+            });  
+             
+             mui.plusReady(function() {    
+            // 获取支付通道  
+                plus.payment.getChannels(function(channels){  
+                for (var i in channels) { 
+                        if (channels[i].id == "wxpay") { 
+                             wxChannel=channels[i];  
+                        }else{ 
+                            aliChannel=channels[i];  
+                        } 
+                    }     
+                },function(e){  
+                 alert("获取支付通道失败："+e.message);  
+                });  
+        })  
+        document.getElementById('zhifubao').addEventListener('tap',function() {  
+            console.log("zhifubao");  
+            pay('alipay');   
+        })  
+  
+        var ALIPAYSERVER='http://demo.dcloud.net.cn/helloh5/payment/alipay.php?total=';  
+        var WXPAYSERVER='http://demo.dcloud.net.cn/helloh5/payment/wxpay.php?total=';  
+        
+        // 2. 发起支付请求  
+        function pay(id){  
+                // 从服务器请求支付订单  
+                var PAYSERVER='';  
+                if(id=='alipay'){  
+                PAYSERVER=ALIPAYSERVER;  
+                channel = aliChannel;  
+            }else if(id=='wxpay'){  
+                    PAYSERVER=WXPAYSERVER;  
+                    channel = wxChannel;  
+                }else{  
+                    plus.nativeUI.alert("不支持此支付通道！",null,"捐赠");  
+                    return;  
+             }  
+                var xhr=new XMLHttpRequest();  
+                 var amount = 0.01; 
+                
+                xhr.onreadystatechange=function(){  
+                	var servlet = localStorage.getItem('servlet');
+                	var dname = localStorage.getItem('dname');
+					var docname = localStorage.getItem('docname');
+                    switch(xhr.readyState){  
+                        case 4:  
+                        if(xhr.status==200){  
+                            plus.payment.request(channel,xhr.responseText,function(result){  
+                                plus.nativeUI.alert("支付成功！",function(){  
+                                	mui.post(servlet+'AppYuyue',{docname:docname,dname:dname},function(data){
+                                		if(data>=0){
+	                                	mui.openWindow({
+													url:"yuyuesuccess.html",
+													id:"yuyuesuccess.html",
+													show:{
+													autoShow:true,
+													aniShow:"slide-in-right",
+													duration:200
+												},
+												waiting:{
+													autoShow:false,
+													options:{
+													}
+												}
+												})}
+	                                		},'json')
+                            });  
+                            },function(error){  
+                                plus.nativeUI.alert("支付失败：" + error.code);  
+                            });  
+                        }else{  
+                            alert("获取订单信息失败！");  
+                        }  
+                        break;  
+                    default:  
+                    break;  
+                }  
+         }  
+            xhr.open('GET',PAYSERVER+amount);  
+            xhr.send();  }
+		
+		
+	</script>
+</html>

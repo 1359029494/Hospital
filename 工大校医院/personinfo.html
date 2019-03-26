@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">个人资料</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="info-body">
+		    	<ul class="mui-table-view">
+		    	        <li class="mui-table-view-cell">
+		    	                <span class="person-label">手机</span> 
+		    	                <span class="person-span" id="phone"></span>
+		    	        </li>
+		    	</ul>
+		    	<ul class="mui-table-view">
+		    	        <li class="mui-table-view-cell">
+		    	                 <span class="person-label">姓名</span> 
+		    	                <span class="person-span" id="name"></span>
+		    	        </li>
+		    	        <li class="mui-table-view-cell">
+		    	                <span class="person-label">性别</span> 
+		    	                <span class="person-span" id="sex"></span>
+		    	        </li>
+		    	</ul>
+		    	<ul class="mui-table-view">
+		    	        <li class="mui-table-view-cell">
+		    	                <span class="person-label">邮箱</span> 
+		    	                <span class="person-span" id="mail"></span>
+		    	        </li>
+		    	        <li class="mui-table-view-cell">
+		    	                <span class="person-label">身份证</span> 
+		    	                <span class="person-span" id="idcard"></span>
+		    	        </li>
+		    	        <li class="mui-table-view-cell">
+		    	                <span class="person-label">出生日期</span> 
+		    	                <span class="person-span" id="birthday"></span>
+		    	        </li>
+		    	        
+		    	    </ul>
+		    </div>		
+		</div>
+	</body>
+	<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var servlet = localStorage.getItem('servlet');
+		window.onload = function(){
+			mui.post(servlet+'AppPerson',{},function(data){
+				$('#phone').html(data.patphonenumber);
+				$('#name').html(data.patname);
+				if(data.patsex == 0){
+					$('#sex').html('女');
+				}
+				if(data.patsex == 1){
+					$('#sex').html('男');
+				}
+				$('#mail').html(data.patmail);
+				$('#idcard').html(data.patidcard);
+				$('#birthday').html(data.patbirthday);
+			},'json')
+		}
+	</script>
+</html>

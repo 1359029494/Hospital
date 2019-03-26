@@ -1,0 +1,57 @@
+{
+	"index.html": {
+		"resources": [
+			"pat_index.html"
+		],
+		"refer": [
+			"mine.html",
+			"pat_index.html"
+		]
+	},
+	"login.html": {
+		"refer": [
+			"registe.html",
+			"index.html"
+		],
+		"resources": []
+	},
+	"registe.html": {
+		"refer": [
+			"login.html",
+			"info.html"
+		],
+		"resources": []
+	},
+	"pat_index.html": {
+		"refer": [
+			"yuyue.html",
+			"order_header.html"
+		]
+	},
+	"order_header.html": {
+		"resources": [
+			"order.html"
+		],
+		"refer": [
+			"order.html"
+		]
+	},
+	"mine.html": {
+		"refer": [
+			"about.html",
+			"personinfo.html",
+			"medicalRecord.html",
+			"login.html"
+		]
+	},
+	"sub.html": {
+		"refer": [
+			"yuyue.html"
+		]
+	},
+	"yuyue.html": {
+		"refer": [
+			"sub.html"
+		]
+	}
+}

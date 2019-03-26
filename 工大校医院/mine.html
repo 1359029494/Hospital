@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+		<style type="text/css">
+			.mui-table-view li{
+				font-size: 16px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title">我 的</h1>
+		</header>
+		<div class="mui-content">
+		    <div id="img" class="img">
+		    	 
+		    </div>
+		    <ul class="mui-table-view">
+		            <li class="mui-table-view-cell" id="li1">
+		                <a class="mui-navigate-right">
+		                    查看个人资料
+		                </a>
+		            </li>
+		            <li class="mui-table-view-cell" id="li2">
+		                <a class="mui-navigate-right">
+		                     查看病历表
+		                </a>
+		            </li>
+		        </ul>
+		        
+		         <ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell" id="li3">
+								<a href="#about" class="mui-navigate-right">关于校医院 <i class="mui-pull-right update">V1.0.0</i></a>
+							</li>
+				</ul>
+				<button class="btn-tuichu" id="tuichu">退出登录</button>
+				<div class="mine-img">
+					<img src="images/logo.png"/>
+				</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var servlet = localStorage.getItem('servlet');
+		var patname = null;
+		window.onload = function(){
+			mui.post(servlet+'AppMine',{},function(data){
+				var sex = '先生';
+				if(data.patsex == 0){
+					sex = '女士'
+				}
+				$('.img').html('<img src="images/my.png"/><span id="name" class="name">'+data.patname+sex+'，您好</span>');
+				patname = data.patname;
+				localStorage.setItem('pname',patname);
+			},'json')
+		}
+		
+		
+		var li1 = document.getElementById('li1');
+		li1.addEventListener('tap',function(){
+			mui.openWindow({
+				url:"personinfo.html",
+						id:"personinfo.html",
+						show:{
+						autoShow:true,
+						aniShow:"slide-in-right",
+						duration:200
+					},
+					waiting:{
+						autoShow:false,
+						options:{
+						}
+					}
+			})
+		})
+		
+		var li2 = document.getElementById('li2');
+		li2.addEventListener('tap',function(){
+			mui.openWindow({
+						url:"medicalRecord.html",
+						id:"medicalRecord.html",
+						show:{
+						autoShow:true,
+						aniShow:"slide-in-right",
+						duration:200
+					},
+					waiting:{
+						autoShow:false,
+						options:{
+						}
+					}
+			})
+		})
+		
+		var li3 = document.getElementById('li3');
+		li3.addEventListener('tap',function(){
+			mui.openWindow({
+						url:"about.html",
+						id:"about.html",
+						show:{
+						autoShow:true,
+						aniShow:"slide-in-right",
+						duration:200
+					},
+					waiting:{
+						autoShow:false,
+						options:{
+						}
+					}
+			})
+		})
+		
+		var loginx={
+		LogOut:function(callback){
+		//do something
+		//callback
+		callback&&callback()
+		}
+		}
+		var btn = document.getElementById('tuichu');
+		btn.addEventListener('tap',function(){
+			var btnArray = ['是', '否'];
+			mui.confirm('您确定退出?', '退出登录', btnArray, function(e) {
+				if (e.index == 0) {
+			mui.post(servlet+'Apptuichu',{},function(data){
+				var curr = plus.webview.currentWebview();
+				var wvs = plus.webview.all();
+				for (var i = 0,len = wvs.length; i < len; i++) {
+				  //关闭除setting页面外的其他页面
+                    if (wvs[i].getURL() == curr.getURL())
+                        continue;
+                    plus.webview.close(wvs[i]);
+				}
+				//打开login页面后再关闭setting页面
+				plus.webview.open('login.html');
+				curr.close();
+			},'json')
+			}
+				})
+		})
+	</script>
+</html>

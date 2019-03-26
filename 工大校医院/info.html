@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+		<link href="css/mui.picker.css" rel="stylesheet" />
+		<link href="css/mui.poppicker.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">信息录入</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="info-body">
+		    	<form class="mui-input-group">
+		    	<div class="phone" style="margin-top: 10px;">
+		    		姓名：<input type="text" id="patname" placeholder="请输入姓名" style="width: 80%;" />
+		    	</div>
+		    	<div class="phone">
+		    		性别：
+		    		<div class="mui-input-row mui-radio mui-left">
+						<label>男</label>
+						<input name="radio1" id="patsex" value="1" type="radio">
+					</div>
+					<div class="mui-input-row mui-radio mui-left">
+						<label>女</label>
+						<input name="radio1" id="patsex" value="0" type="radio">
+					</div>
+		    	</div>
+		    	<div class="phone">
+		    		邮箱：<input type="text" id="patmail" placeholder="请输入邮箱" style="width: 80%;" />
+		    	</div>
+		    	<div class="phone">
+		    		身份证：<input type="text" id="patidcard" placeholder="请输入身份证" style="width: 80%;" />
+		    	</div>
+		    	
+		    	
+		    	<div class="mui-content-padded">
+					<h5 class="mui-content-padded">出生日期</h5>
+					<button id='pickDateBtn' type="button" class="mui-btn mui-btn-block">请选择日期</button>
+					<div id="info"></div>
+				</div>
+                
+		    	
+		    	<div class="mui-content-padded">
+		    		<h5 class="mui-content-padded">家庭地址：</h5>
+					<button id='showCityPicker3' class="mui-btn mui-btn-block" type='button'>请选择地址</button>
+					<div id='cityResult3' class="ui-alert"></div>
+			</div>
+			    <div style="padding-bottom: 20px;">
+			        <button type="button" id="registe" class="btn-index" >注 册</button>
+			    </div>
+			</form>
+		    </div>
+		</div>
+	</body>
+    <script src="js/mui.min.js"></script>
+	<script src="js/mui.picker.js"></script>
+	<script src="js/mui.poppicker.js"></script>
+	<script src="js/city.data.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	var patphonenumber = null;
+	var patpass = null;
+	var patbirthday = null;
+	var pataddress = null;
+	
+	 (function($, doc) {
+				$.init();
+				$.ready(function() {
+					var _getParam = function(obj, param) {
+						return obj[param] || '';
+					};
+					//-----------------------------------------
+					//					//级联示例
+					var cityPicker3 = new $.PopPicker({
+						layer: 3
+					});
+					cityPicker3.setData(cityData3);
+					var showCityPickerButton = doc.getElementById('showCityPicker3');
+					var cityResult3 = doc.getElementById('cityResult3');
+					showCityPickerButton.addEventListener('tap', function(event) {
+						cityPicker3.show(function(items) {
+							cityResult3.innerText = "你选择的城市是:" + _getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text');
+							pataddress =  _getParam(items[0], 'text') + _getParam(items[1], 'text') + _getParam(items[2], 'text');
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+				});
+			})(mui, document);
+	
+	
+	mui.plusReady(function(){
+		var phonenumber = plus.storage.getItem("phonenumber");
+		patphonenumber = phonenumber;
+		patpass = localStorage.getItem('patpass')
+	})
+	
+	//设置时间选择
+	var info = document.getElementById("info");
+			
+	document.getElementById("pickDateBtn").addEventListener('tap', function() {
+	var dDate = new Date();
+	dDate.setFullYear(2014, 7, 16);
+	var minDate = new Date();
+	minDate.setFullYear(1900, 0, 1);
+	var maxDate = new Date();
+	maxDate.setFullYear(2016, 11, 31);
+	plus.nativeUI.pickDate(function(e) {
+		var d = e.date;
+		info.innerText = '您选择的日期是:' + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+		patbirthday =  d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+	}, function(e) {
+		info.innerText = "";
+	}, {
+		title: "请选择日期",
+		date: dDate,
+		minDate: minDate,
+		maxDate: maxDate
+	});
+})
+			
+			
+		var registe = document.getElementById('registe');
+		registe.addEventListener('tap',function(){
+		var patname = document.getElementById('patname').value;
+		var patsex = document.getElementById('patsex').value;
+		var patidcard = document.getElementById('patidcard').value;
+		var patmail = document.getElementById('patmail').value;
+		var servlet = localStorage.getItem('servlet');
+		mui.post(servlet+'AppRegister',
+			{patname:patname,patsex:patsex,patidcard:patidcard,patbirthday:patbirthday,patmail:patmail,
+			pataddress:pataddress,patphonenumber:patphonenumber,patpass:patpass
+			},function(data){
+				mui.toast('注册成功',{ duration:'long', type:'div' })
+				if(data >= 0){
+					mui.openWindow({
+						url:"login.html",
+						id:"login.html",
+						show:{
+						autoShow:true,
+						aniShow:"slide-in-right",
+						duration:500
+					},
+					waiting:{
+						autoShow:false,
+						options:{
+							
+						}
+					}
+					})
+				}
+			}
+		)
+	})
+</script>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title" id="sub-title"></h1>
+		</header>
+		<div class="mui-content">
+		   <div style="margin-left: 10px; margin-top: 10px; color: #666; margin-left: 0px;">
+		   		<img src="images/3.jpg" style="width: 100%;"/>
+		   		请选择医生:
+		   </div>
+		    <div class="doc">
+		    	
+		    </div>
+		    	<button id="sub" class="btn-index">确 定</button>
+		</div>
+	</body>
+	<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	var dname = '';
+	var servlet = localStorage.getItem('servlet');
+	window.onload = function(){
+		dname = GetQueryString('dname');
+		mui.post()
+		var title = document.getElementById('sub-title');
+		title.innerHTML=dname;
+		
+		mui.post(servlet+'AppFinddoc',{dname:dname},function(data){
+			tplm='';
+			for(d in data){
+				tplm+='<div class="doc-info">'
+			    		+'<div class="mui-input-row mui-radio mui-left">'
+			    		+'<label><img src="'+data[d].docphoto+'"/><span>'+data[d].docname+'</span></label>'
+			    		+' <input name="radio" class="radio" photo="'+data[d].docphoto+'" value="'+data[d].docname+'" type="radio">'
+			    		+'</div>'
+			    		+'</div>'
+			}
+			$('.doc').html(tplm);
+		},'json')
+	}
+	
+	function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+     if(r!=null)return  decodeURI(r[2]); return null;
+}
+
+	var sub = document.getElementById('sub');
+	sub.addEventListener('tap',function(){
+		var docname = $("input[name='radio']:checked").val();
+		var photo = $("input[name='radio']:checked").attr('photo');
+		localStorage.setItem('photo',photo);
+		localStorage.setItem('docname',docname);
+		localStorage.setItem('dname',dname);
+			mui.openWindow({
+						url:"yuyuepay.html",
+						id:"yuyuepay.html",
+						show:{
+						autoShow:true,
+						aniShow:"slide-in-right",
+						duration:200
+					},
+					waiting:{
+						autoShow:false,
+						options:{
+						}
+					}
+					})
+		
+	})
+
+</script>
+</html>

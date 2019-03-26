@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+		<script src="js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title">登录</h1>
+		</header>
+		<div class="mui-content">
+			<div class="login-img">
+				<img src="images/logo.png"/>
+			</div>
+			<div class="input">
+			    <form class="mui-input-group">
+				    <div class="mui-input-row">
+				        <label>用户名</label>
+				    <input type="number" id="username" class="mui-input-clear" placeholder="请输入用户名">
+				    </div>
+				    <div class="mui-input-row">
+				        <label>密码</label>
+				        <input type="password" id="userpass" class="mui-input-password" placeholder="请输入密码">
+				    </div>
+				    <div class="mui-button-row">
+				        <button type="button" id="sub" class="mui-btn mui-btn-primary" >确 认</button>
+				    </div>
+				    <div class="registe">
+				    	<a id="registe" href="#"><span class="mui-pull-right" style="margin-right: 30px; margin-top: 10px;">注册</span></a>
+				    </div>
+				</form>
+			</div>
+		</div>
+	</body>
+	<script src="js/castapp.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		ca.init(false);
+		var sub = document.getElementById('sub')
+		var servlet = 'http://192.168.43.247:8080/hospital/';
+		localStorage.setItem('servlet',servlet);
+		sub.addEventListener('tap',function(){
+			var username = document.getElementById('username').value;
+			var userpass = document.getElementById('userpass').value;
+			mui.post(servlet+'AppLogin',
+			{'username':username,'userpass':userpass},
+			function(data){
+				if(data == true){
+					mui.toast('登陆成功',{ duration:'long', type:'div' })
+					mui.openWindow({
+						url:"index.html",
+						id:"index.html",
+						show:{
+						autoShow:true,
+						aniShow:"slide-in-right",
+						duration:500
+					},
+					waiting:{
+						autoShow:true,
+						title:"正在加载....",
+						options:{
+							
+						}
+					}
+					})
+				}else{
+					mui.toast('账号或密码错误',{ duration:'long', type:'div' }) 
+				}
+			},'json');
+		})
+			
+		var registe = document.getElementById('registe');
+		registe.addEventListener('tap',function(){
+			mui.openWindow({
+						url:"registe.html",
+						id:"registe.html",
+						show:{
+						autoShow:true,
+						aniShow:"slide-in-right",
+						duration:200
+					},
+					waiting:{
+						autoShow:false,
+						options:{
+						}
+					}
+					})
+		})
+		
+	</script>
+
+</html>

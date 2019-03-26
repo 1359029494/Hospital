@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title">首 页</h1>
+		</header>
+		
+		<div class="mui-content">
+			<div style="text-align: center;margin-top: 10px;">
+				<img src="images/logo.png"/>
+			</div>
+		    <div class="mui-slider">
+				  <div class="mui-slider-group mui-slider-loop">
+				    <!--支持循环，需要重复图片节点-->
+				    <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="4.jpg" /></a></div>
+				    <div class="mui-slider-item"><a href="#"><img src="images/1.jpg" /></a></div>
+				    <div class="mui-slider-item"><a href="#"><img src="images/2.jpg" /></a></div>
+				    <div class="mui-slider-item"><a href="#"><img src="images/3.jpg" /></a></div>
+				    <!--支持循环，需要重复图片节点-->
+				    <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="images/1.jpg" /></a></div>
+				  </div>
+			</div>
+			
+			<div class="func">
+				<ul class="may-gird">
+				<li class="li1" >
+				    <a href="#">
+				        <span id="yuyue" class="mui-icon iconfont icon-yuyue s1"></span>
+				        <div class="mui-media-body">预 约</div>
+				    </a>
+				</li>
+				<li class="li2">
+				    <a href="#">
+				        <span id="order" class="mui-icon iconfont icon-dingdan s1"></span>
+				        <div class="mui-media-body">查看订单</div>
+				    </a>
+				</li>
+				   </ul>
+			</div>
+			
+		</div>
+	</body>
+<script>
+	var gallery = mui('.mui-slider');
+	gallery.slider({
+	  interval:2000//自动轮播周期，若为0则不自动播放，默认为0；
+	});
+	
+	var yuyue = document.getElementById('yuyue');
+	yuyue.addEventListener('tap',function(){
+		mui.openWindow({
+						url:"yuyue.html",
+						id:"yuyue.html",
+						show:{
+						autoShow:true,
+						aniShow:"slide-in-right",
+						duration:200
+					},
+					waiting:{
+						autoShow:false,
+						options:{
+						}
+					}
+					})
+	})
+	
+	var order = document.getElementById('order');
+	order.addEventListener('tap',function(){
+		mui.openWindow({
+						url:"order_header.html",
+						id:"order_header.html",
+						show:{
+						autoShow:true,
+						aniShow:"slide-in-right",
+						duration:200
+					},
+					waiting:{
+						autoShow:false,
+						options:{
+						}
+					}
+					})
+	})
+</script>
+</html>

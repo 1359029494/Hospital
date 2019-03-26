@@ -1,0 +1,24 @@
+.mui-bar{
+	background-color: #00AEF0;
+}
+.mui-title{
+	color: white;
+	
+	font-weight: 700;
+}
+.mui-icon-left-nav{
+	color: white;
+}
+.mui-table-view{
+	margin-top: 10px;
+}
+.mui-table-view li{
+	height: 80px;
+	line-height: 20px;
+}
+.mui-media-object{
+	height: 60px !important;
+	width: 60px !important;
+	max-width:60px !important;
+}
+

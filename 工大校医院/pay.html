@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">支 付</h1>
+		</header>
+		
+		<div class="mui-content">
+		    <div class="order-table">
+			    	<table class="table" border="1" cellspacing="1" cellpadding="1">
+			    		
+			    	</table>
+			    </div>
+			<div class="btn">
+				<button class="btn-pay" id="zhifubao">确认缴费</button>
+			</div>
+		</div>
+	</body>
+<script type="text/javascript" src="js/immersed.js" ></script>
+<script type="text/javascript">
+			var servlet = localStorage.getItem('servlet');
+			mui.init()
+			window.onload = function(){
+				var state = 1;
+				mui.post(servlet+'AppPay',{},function(data){
+					var tpml='';
+			    	var tpml2 =
+			    	'<tr>'
+		    		+'<th>订单编号</th>'
+		    		+'<th>订单价格</th>'
+		    		+'<th>订单状态</th>'
+		    		+'<th>订单日期</th>'
+		    		+'</tr>';
+			    	for(m in data){
+			    	tpml=
+			    	'<tr>'
+			    	+'<td>'+data[m].ornumber+'</td>'
+			    	+'<td>'+data[m].orprice+'</td>'
+			    	if(data[m].orstate != 1){
+			    		tpml+='<td>未缴费</td>'
+			    		state = 0;
+			    	}
+			    	tpml+='<td>'+data[m].ordate+'</td>'
+			    	tpml+='</tr>';
+			    	tpml2+=tpml;
+			    	}
+			    	$('.table').html(tpml2);
+				},'json')
+			}
+			
+			var wxChannel = null; // 微信支付  
+            var aliChannel = null; // 支付宝支付  
+            var channel = null;   //支付通道 
+            mui.init({  
+                swipeBack:true //启用右滑关闭功能  
+            });  
+             
+             mui.plusReady(function() {    
+            // 获取支付通道  
+                plus.payment.getChannels(function(channels){  
+                for (var i in channels) { 
+                        if (channels[i].id == "wxpay") { 
+                             wxChannel=channels[i];  
+                        }else{ 
+                            aliChannel=channels[i];  
+                        } 
+                    }     
+                },function(e){  
+                 alert("获取支付通道失败："+e.message);  
+                });  
+        })  
+        document.getElementById('zhifubao').addEventListener('tap',function() {  
+            console.log("zhifubao");  
+            pay('alipay');   
+        })  
+  
+        var ALIPAYSERVER='http://demo.dcloud.net.cn/helloh5/payment/alipay.php?total=';  
+        var WXPAYSERVER='http://demo.dcloud.net.cn/helloh5/payment/wxpay.php?total=';  
+        
+        // 2. 发起支付请求  
+        function pay(id){  
+                // 从服务器请求支付订单  
+                var PAYSERVER='';  
+                if(id=='alipay'){  
+                PAYSERVER=ALIPAYSERVER;  
+                channel = aliChannel;  
+            }else if(id=='wxpay'){  
+                    PAYSERVER=WXPAYSERVER;  
+                    channel = wxChannel;  
+                }else{  
+                    plus.nativeUI.alert("不支持此支付通道！",null,"捐赠");  
+                    return;  
+             }  
+                var xhr=new XMLHttpRequest();  
+                 var amount = 0.01; 
+                
+                xhr.onreadystatechange=function(){  
+                    switch(xhr.readyState){  
+                        case 4:  
+                        if(xhr.status==200){  
+                            plus.payment.request(channel,xhr.responseText,function(result){  
+                                plus.nativeUI.alert("支付成功！",function(){  
+                                mui.post(servlet+'AppPaySuccess',{},function(data){
+                                	if(data >= 0){
+                                		mui.openWindow({
+												url:"paysuccess.html",
+												id:"paysuccess.html",
+												show:{
+												autoShow:true,
+												aniShow:"slide-in-right",
+												duration:200
+											},
+											waiting:{
+												autoShow:false,
+												options:{
+												}
+											}
+											})
+                                	}
+                                },'json')
+                            });  
+                            },function(error){  
+                                plus.nativeUI.alert("支付失败：" + error.code);  
+                            });  
+                        }else{  
+                            alert("获取订单信息失败！");  
+                        }  
+                        break;  
+                    default:  
+                    break;  
+                }  
+         }  
+            xhr.open('GET',PAYSERVER+amount);  
+            xhr.send();  }
+		</script>
+</html>

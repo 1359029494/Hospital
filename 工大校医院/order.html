@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<div  class="mui-content">
+			<div id="order-hello" style="margin-left: 0px;">
+				
+				您好,请查看您的订单
+			</div>
+			<div id="pullrefresh">
+			    <div class="order-table">
+			    	<table class="table" border="1" cellspacing="1" cellpadding="1">
+			    	</table>
+			    </div>
+			    <div class="btn" id="pay" style="height: 50px; margin-bottom: 50px;">
+		    		
+		    	</div>
+		    </div>
+		    
+		</div>
+	</body>
+	<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',//下拉加载容器
+					down: {
+						style:'circle',
+						auto:true,
+						callback: pulldownRefresh,//执行回调函数
+						contentdown:"下拉刷新",
+						contentover:"释放刷新",
+						contentrefresh:"正在刷新..."
+					},
+					
+					up: {
+						auto:true,
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			
+			var servlet = localStorage.getItem('servlet');
+			function pulldownRefresh(){
+				var state = 1;
+				var table = document.getElementById('')
+				mui.post(servlet+'AppFindorder',{},function(data){
+					var tpml='';
+			    	var tpml2 =
+			    	'<tr>'
+		    		+'<th>订单编号</th>'
+		    		+'<th>订单价格</th>'
+		    		+'<th>订单状态</th>'
+		    		+'<th>订单日期</th>'
+		    		+'</tr>';
+			    	for(m in data){
+			    	tpml=
+			    	'<tr>'
+			    	+'<td>'+data[m].ornumber+'</td>'
+			    	+'<td>'+data[m].orprice+'</td>'
+			    	if(data[m].orstate == 1){
+			    		tpml+='<td>已缴费</td>'
+			    	}else{
+			    		tpml+='<td>未缴费</td>'
+			    		state = 0;
+			    	}
+			    	tpml+='<td>'+data[m].ordate+'</td>'
+			    	tpml+='</tr>';
+			    	tpml2+=tpml;
+			    	}
+			    	$('.table').html(tpml2);
+			    	if(state == 0){
+					var hello = document.getElementById('order-hello');
+					hello.innerHTML='<img src="images/order.jpg" width="100%" height="250px"/>您好，你存在未缴费的订单，请尽快缴费';
+					$('#pay').html('<button id="pay" class="btn-pay"">缴 费</button>')
+					}else{
+					var hello = document.getElementById('order-hello');
+					hello.innerHTML='<img src="images/order.jpg" width="100%" height="250px"/>您好，您当前不存在未缴费订单';
+					$('#pay').html('<button class="btn-pay" disabled="disabled">缴 费</button>')
+			}
+				},'json')
+				mui("#pullrefresh").pullRefresh().endPulldownToRefresh()
+			}
+			
+			
+			
+			function pullupRefresh(){
+				mui("#pullrefresh").pullRefresh().endPullupToRefresh()
+			}
+			
+			var pay = document.getElementById('pay');
+			pay.addEventListener('tap',function(){
+				mui.openWindow({
+						url:"pay.html",
+						id:"pay.html",
+						show:{
+						autoShow:true,
+						aniShow:"slide-in-right",
+						duration:200
+					},
+					waiting:{
+						autoShow:false,
+						options:{
+						}
+					}
+					})
+			})
+</script>
+</html>

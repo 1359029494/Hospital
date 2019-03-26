@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title">预约成功</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="yuyue-title">
+		    	<div class="yuyue-img">
+		    		
+		    	</div>
+		    	<span class="yuyue-span"></span>
+		    </div>
+		    <button id="back-index" class="btn-index">返回首页</button>
+		</div>
+	</body>
+	<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		
+		window.onload = function(){
+			var photo = localStorage.getItem('photo');
+			var dname = localStorage.getItem('dname');
+			var docname = localStorage.getItem('docname');
+			$('.yuyue-img').html('<img src="'+photo+'"/>');
+			$('.yuyue-span').html('您预约的'+dname+docname+'医生成功！')
+			
+		}
+		
+		var btn = document.getElementById('back-index');
+		var loginx={
+		LogOut:function(callback){
+		//do something
+		//callback
+		callback&&callback()
+		}
+		}
+		btn.addEventListener('tap',function(){
+                        loginx.LogOut(function() {
+                            if (mui.os.ios || mui.os.ipad || mui.os.iphone) {
+                                // 获取所有Webview窗口
+                                var curr = plus.webview.currentWebview();
+                                var wvs = plus.webview.all();
+                                for (var i = 0, len = wvs.length; i < len; i++) {
+                                    //关闭除setting页面外的其他页面
+                                    if (wvs[i].getURL() == curr.getURL())
+                                        continue;
+                                    plus.webview.close(wvs[i]);
+                                }
+                                //打开login页面后再关闭setting页面
+                                plus.webview.open('index.html');
+                                curr.close();
+                            } else
+                                plus.runtime.quit();
+                        });
+		})
+		
+	</script>
+</html>
